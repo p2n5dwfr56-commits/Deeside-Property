@@ -7,6 +7,8 @@ import { daysBetween, fmtMoney } from '../domain/parse';
 import { dashboard, hasEvent, priceChange } from '../domain/stats';
 import { daysOnMarket } from '../domain/engine';
 import { addDemo } from '../domain/demo';
+import { LastCheck } from './Monitoring';
+import { Changes } from './Changes';
 import { ChangeBadge, DemoPill, StatusPill, pct } from './components';
 
 export interface Filters { town: string; q: string; minPrice: string; maxPrice: string; minBeds: string; type: string; status: string; move: string; seen: string; watched: boolean; sort: string }
@@ -81,7 +83,7 @@ export function PropertyCard({ ctx, p }: { ctx: Ctx; p: Property }) {
     <a className={`card pcard ${c && c.diff < 0 ? 'reduced' : ''}`} href={`#p-${p.id}`} data-testid="property-card">
       <div className="ph">{p.photoUrl && p.photoPermitted ? <img src={p.photoUrl} alt="" loading="lazy" /> : <span>{p.photoUrl ? 'Photo hidden (display not confirmed as permitted)' : 'No photo'}</span>}</div>
       <div className="bd">
-        <div className="row"><StatusPill s={p.status} />{p.isDemo && <DemoPill />}{p.watched && <span className="pill st-for_sale" title="On your watchlist">★ Watching</span>}</div>
+        <div className="row"><StatusPill s={p.status} />{p.isDemo && <DemoPill kind={p.demoKind} />}{p.watched && <span className="pill st-for_sale" title="On your watchlist">★ Watching</span>}</div>
         <div><span className="muted small">{p.pricingBasis !== 'Unknown' ? p.pricingBasis : ''}</span> <span className="price">{fmtMoney(p.askingPrice)}</span></div>
         <ChangeBadge db={ctx.db} p={p} />
         <div><b>{p.address}</b><br /><span className="muted">{p.town}{p.postcode ? ` ${p.postcode}` : ''}</span></div>
@@ -95,21 +97,24 @@ export function Dashboard({ ctx }: { ctx: Ctx }) {
   const [f, set] = useFilters();
   const { db } = ctx;
   if (!db.properties.length) return (
-    <div className="card stack" style={{ maxWidth: 680 }}>
+    <div className="stack" style={{ maxWidth: 720 }}><LastCheck ctx={ctx} /><div className="card stack">
       <h1>No properties yet</h1>
-      <p>Start by adding a property you have seen advertised, importing a spreadsheet (CSV) or pasting a property alert email. Everything you enter is saved in this browser and every change is kept as history.</p>
-      <div className="row"><a className="btn primary" href="#add">Add a property</a><a className="btn" href="#import">Import CSV or email</a>
+      <p>Properties appear here automatically when the property alert emails you have set up arrive in the alert inbox. The automatic check reads them every 3 hours; see <a href="#monitor">Monitoring</a> for what has been received.</p>
+      <p className="small">You can also add a property by hand or import a spreadsheet. Every change is kept as history.</p>
+      <div className="row"><a className="btn primary" href="#add">Add a property</a><a className="btn" href="#import">Import a spreadsheet</a>
         <button onClick={() => ctx.commit(addDemo(db, ctx.now))}>Load example data</button></div>
       <p className="small muted">Example data is fictional, labelled "Example" everywhere, and can be removed in one click from Settings &amp; data.</p>
-    </div>
+    </div></div>
   );
   const props = applyFilters(db, f, ctx.areaTowns, ctx.now);
   const d = dashboard(db, props, ctx.now);
   const k = (v: string | number, l: string, s?: string, test?: string) => <div className="card kpi" data-testid={test}><div className="v">{v}</div><div className="l">{l}</div>{s && <div className="s">{s}</div>}</div>;
-  const demo = db.properties.some((p) => p.isDemo);
+  const demo = db.properties.some((p) => p.isDemo && p.demoKind !== 'simulated');
   return (
     <div className="stack">
       {demo && <div className="banner demo">This includes <b>fictional example properties</b> (marked "Example"). Remove them any time in <a href="#data">Settings &amp; data</a>.</div>}
+      <LastCheck ctx={ctx} />
+      <Changes ctx={ctx} />
       <div className="row"><h1>Dashboard</h1><span className="sp" /><span className="muted small">{props.length} of {db.properties.length} properties shown</span></div>
       <FilterBar ctx={ctx} f={f} set={set} />
       <div className="grid kpis">

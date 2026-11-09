@@ -31,7 +31,7 @@ export function Analysis({ ctx }: { ctx: Ctx }) {
           <tbody>{bands.map((b) => <tr key={b.label}><td>{b.label}</td><td className="n">{b.count}</td><td><div className="row" style={{ flexWrap: 'nowrap' }}><span style={{ width: 70, textAlign: 'right' }}>{b.count ? D(b.medianDays) : '–'}</span><InlineBar v={b.medianDays} max={maxDays} /></div></td></tr>)}</tbody></table></div>
         <div className="card"><h2>Reductions: original vs latest asking price</h2>
           {reducing.length ? <div className="tablewrap"><table><thead><tr><th>Property</th><th className="n">Original</th><th className="n">Latest</th><th className="n">Change</th></tr></thead>
-            <tbody>{reducing.map(({ p, c }) => <tr key={p.id}><td><a href={`#p-${p.id}`}>{p.address}</a><br /><span className="small muted">{p.town}{p.isDemo ? ' · Example' : ''}</span></td><td className="n">{fmtMoney(p.originalAskingPrice)}</td><td className="n">{fmtMoney(p.askingPrice)}</td><td className="n down">−{fmtMoney(-c!.diff)}<br />{c!.pct.toFixed(1)}%</td></tr>)}</tbody></table></div> : <p className="muted">No reductions recorded among these properties.</p>}
+            <tbody>{reducing.map(({ p, c }) => <tr key={p.id}><td><a href={`#p-${p.id}`}>{p.address}</a><br /><span className="small muted">{p.town}{p.isDemo ? (p.demoKind === 'simulated' ? ' · Simulated test' : ' · Example') : ''}</span></td><td className="n">{fmtMoney(p.originalAskingPrice)}</td><td className="n">{fmtMoney(p.askingPrice)}</td><td className="n down">−{fmtMoney(-c!.diff)}<br />{c!.pct.toFixed(1)}%</td></tr>)}</tbody></table></div> : <p className="muted">No reductions recorded among these properties.</p>}
         </div>
       </div>
     </div>

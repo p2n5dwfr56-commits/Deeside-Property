@@ -6,7 +6,9 @@ import { fmtDate, fmtMoney } from '../domain/parse';
 import { priceChange } from '../domain/stats';
 
 export const StatusPill = ({ s }: { s: Status }) => <span className={`pill st-${s}`}>{STATUS_LABEL[s]}</span>;
-export const DemoPill = () => <span className="pill demo" title="Fictional demonstration data">Example</span>;
+export const DemoPill = ({ kind }: { kind?: 'example' | 'simulated' }) => kind === 'simulated'
+  ? <span className="pill demo" title="From the labelled simulated test mailbox, not a real notification">Simulated test</span>
+  : <span className="pill demo" title="Fictional demonstration data">Example</span>;
 
 /** Shows a value, or "Unknown" in grey italics when it is missing. */
 export function Val({ v, fmt }: { v: unknown; fmt?: (x: never) => ReactNode }) {

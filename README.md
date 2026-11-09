@@ -1,75 +1,84 @@
 # Deeside Property Watch
 
-A private research tool for tracking residential property for sale around Torphins, Banchory, Aboyne, Ballater,
-Kincardine O'Neil and Lumphanan. It records every asking price and status change, so you can see what has been
-reduced, what has gone under offer, and what has come back on the market.
+A private service that watches homes for sale around Torphins, Banchory, Aboyne, Ballater, Kincardine O'Neil and
+Lumphanan. It collects the property alerts that ASPC, Rightmove, Zoopla, OnTheMarket and agents send. Every 3 hours,
+without you, it records:
+- every new listing;
+- every price change;
+- every status change (Under offer, closing date, back on the market).
 
-**What it is not:** it does not show sold prices or valuations. Every figure is an *asking price* the app has recorded.
-A reduction in asking price is not by itself evidence that local values are falling.
+Each morning the dashboard shows what has changed.
 
-## Status of this version (first release: stages B, C and E)
+It records **asking prices**, not sold prices or valuations. A reduction in asking price is not by itself evidence
+that local values are falling.
 
-| Works now | Not yet |
-|---|---|
-| Add and edit properties by hand; "Unknown" for anything not supplied | Private login and use across devices (needs a Supabase account: see below) |
-| CSV import with preview, per-row problems, template download | Email alerts (in-app alerts only for now) |
-| Property-alert email import (paste or .eml) with preview | Email reader tuned to a real ASPC alert (needs a sample) |
-| Full history: new, reduced/increased, closing date, under offer, missives, sold (confirmed), withdrawn, returned, relisted | Any automatic collection from websites (stage D: only with permission) |
-| No duplicates: matched by listing ID, link, or normalised address and postcode | Postcode-accurate distances (uses approximate town centres) |
-| "Complete list" imports mark missing listings **No longer seen (unverified)**, never sold | |
-| Dashboard, filters, property cards, price graph, timeline, notes, watchlist | |
-| Analysis: by town, by price range, inventory over time, reductions | |
-| Alerts: reductions, watched under offer, back on market, new matches, long on market | |
-| CSV export (properties, full history), JSON backup and restore | |
-| Fictional example data, labelled "Example", removable in one click | |
+```
+ Portals & agents ──alert emails──▶ dedicated Gmail inbox
+                                          │  read-only, every 3 hours
+                                GitHub Actions: worker/run.ts ──▶ Supabase database ◀── website (Netlify)
+                                (match, record history, alerts)    (private, versioned)     Mac & iPhone, private login
+```
 
-Data is saved in the browser on the device you use (it survives refreshes and restarts). Download a backup from
-**Settings & data** now and then until online sync is set up.
+- **Setup steps (one time):** [docs/SETUP.md](docs/SETUP.md)
+- **Data sources compared, and what can't be collected:** [docs/DATA-SOURCES.md](docs/DATA-SOURCES.md)
 
-## Stage A: where the data can come from
+## What each run does
+1. Reads new emails in the alert inbox, without changing the inbox, plus the simulated test mailbox while test mode is on.
+2. Recognises the source from the sender or the listing links, and reads each listing: address, town, postcode, price,
+   earlier price, status wording, bedrooms, type and listing link.
+3. Matches it to a property already recorded:
+   - by the portal's listing ID or link;
+   - or by a building address with a house number or name.
+   Look-alikes that can't be matched with confidence go to **Possible duplicates to check** and are not merged. You decide.
+4. Records every change with the date observed, the source, the email it came from, and how certain it is: reported by
+   the source, detected by comparison, entered by you, or assumed.
+5. Never lets an older email overwrite newer facts. Never processes the same email twice. Never treats a listing that
+   stops appearing as sold.
+6. Records the run: emails read, properties created and updated, failures. It also tracks each source's health and warns
+   when a source goes quiet.
+7. Raises alerts for:
+   - price reductions;
+   - watched properties going under offer;
+   - properties back on the market;
+   - new matches for your criteria;
+   - properties long on the market;
+   - possible duplicates;
+   - collection failures.
+   It can also email you a summary.
 
-| Source | Can it be used? | How this app uses it |
-|---|---|---|
-| **ASPC** (Aberdeen Solicitors Property Centre) | No public data feed or API found. Its website terms could not be read automatically; contact centre@aspc.co.uk / 01224 632949 to ask about a feed. | You receive ASPC saved-search alert emails and import them (paste or .eml). The app never logs in to or copies the ASPC website. |
-| **Selling agents' own websites** | No standard feed. Some agents can send a CSV or XML feed on request. | CSV import; any agreed feed can be added in stage D. |
-| **Rightmove** | No public API; its terms prohibit automated copying. | Not used. Manual entry of what you see is fine. |
-| **Zoopla** | Its public API was withdrawn. | Not used. |
-| **Scottish EPC register** | Open data, published quarterly under the Open Government Licence (address fields carry Royal Mail copyright). | Candidate for stage D: look up EPC rating and floor area by address. |
-| **Registers of Scotland** (sold prices) | Individual sale prices need a paid ScotLIS search or a data licence (data@ros.gov.uk). Free statistics are area averages only. | Not used. "Sold (confirmed)" is only set by you or by an explicit "sold" from a source. |
-| **Home Reports** | Available from the selling agent on request; not open data. | Entered by you only, never estimated. |
+## The website
+- **Dashboard:**
+  - the last automatic check;
+  - **What's changed** since your last visit;
+  - headline figures, filters and property cards.
+- **Monitoring:**
+  - every source's status (delivering, gone quiet, problem, not set up);
+  - recent runs and notifications;
+  - the duplicate review queue;
+  - missing information;
+  - listings not mentioned recently.
+- **Property page:** price graph, full timeline with source and certainty, links to every portal listing, notes, watchlist.
+- **Analysis, Alerts, Settings & data:** as before. Manual entry and spreadsheet import remain as a fallback.
 
-Sources: [ASPC](https://www.sspc.co.uk/centre/aspc) ·
-[Zoopla API terms](https://developer.zoopla.co.uk/API_terms_of_use) ·
-[Scottish EPC data](https://data.gov.scot/dataset/domestic_energy_performance_certificates___dataset_to_q1_2026) ·
-[Registers of Scotland statistics](https://www.ros.gov.uk/data-and-statistics/property-market-statistics/house-price-map-visual) ·
-[ASPC company record](https://find-and-update.company-information.service.gov.uk/company/SC065531)
+Without the cloud settings, the website runs as an **offline preview** using browser storage.
 
-Rules the app follows: no scraping, no logging in on your behalf, no getting round CAPTCHAs or paywalls, photos
-shown only when you tick "I have permission to display this photo", and no automatic check is reported unless it
-actually ran and returned valid data.
+## Test data
+`worker/fixtures/simulated/` holds **labelled simulated emails**: `[SIMULATED TEST]`, fictional properties, listing numbers
+starting 999. They are delivered over two days of scheduled runs to demonstrate the pipeline. Properties from them are
+marked "Simulated test" everywhere and can be removed in one click. Fictional "Example" properties are separate and
+also removable.
 
-## How it works (for whoever maintains it)
-
-- `src/domain/` holds the plain-TypeScript logic, with no screen code: tracking engine (`engine.ts`), CSV and email readers,
-  statistics, storage, example data. Unit tests are in `engine.test.ts`.
-- `src/ui/` holds the React screens. Pages are plain `#name` links (`#import`, `#p-<id>`).
-- Nothing is ever deleted from a property's history. Each change is an event with old and new values, date and source.
-- Storage is browser localStorage behind `load`/`save` in `store.ts`. Supabase replaces those two calls.
-
+## For whoever maintains it
 ```
 npm install
-npm test          # 19 unit tests
-npm run build
-npm run e2e       # 30 browser checks (acceptance list, desktop, tablet and phone layouts)
-npm run dev       # local development server
+npm test                                  # 37 unit tests, including simulated monitoring runs
+npm run build && npm run e2e              # 30 browser checks (needs Playwright)
+npm run monitor -- --trigger manual       # one run; uses data/state.json unless Supabase secrets are set
+npm run dev                               # website, offline preview
 ```
-
-## Deploying
-
-**Netlify (hosting, free tier):** connect this repository in Netlify. `netlify.toml` sets the build. No keys
-are needed. The site sends `noindex` so search engines don't list it.
-
-**Supabase (private login and sync, free tier), next step:** needs a Supabase project created in your own account.
-Only the public "anon" key goes in the website. It is designed to be public and is protected by row-level security, so each
-login sees only its own data. Any private keys (email service, data feeds) belong in Netlify or Supabase
-settings, never in the code.
+- `src/domain/`: engine (matching and history), portals (email reading), pipeline (one run), store, stats. Plain TypeScript.
+- `worker/`: the scheduled job: mailbox (IMAP read-only, simulated), store (Supabase or file), summary email.
+- `src/ui/`, `src/cloud.ts`: the website and its login and database connection.
+- `supabase/schema.sql`: tables and row-level security. Only emails in `allowed_users` can read or change data.
+- Secrets live only in GitHub Actions secrets and Netlify settings. The website contains only the public Supabase address
+  and publishable key.

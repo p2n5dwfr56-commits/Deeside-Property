@@ -52,7 +52,7 @@ try {
   check('no duplicate properties after two imports', (await cards()) === 2, String(await cards()));
 
   // 3. a price change records old and new values
-  rep = await importCsv('list2.csv', 'Address,Town,Price,Observed date\n12 High Street,Torphins,"Offers over £285,000",2026-10-15\n3 Mill Lane,Torphins,250000,2026-10-15\n');
+  rep = await importCsv('list2.csv', 'Address,Town,Price\n12 High Street,Torphins,"Offers over £285,000"\n3 Mill Lane,Torphins,250000\n');
   check('price change counted as an update', /1 updated/.test(rep), rep);
   await page.goto(url + '#dashboard'); await page.locator('[data-testid=property-card]', { hasText: '12 High Street' }).click();
   const tl = () => page.getByTestId('timeline').textContent();

@@ -2,9 +2,9 @@
 import { useState } from 'react';
 import type { Ctx } from './App';
 import type { PropertyEvent, Status } from '../domain/types';
-import { EVENT_LABEL, STATUS_LABEL } from '../domain/types';
+import { CONFIDENCE_LABEL, EVENT_LABEL, STATUS_LABEL } from '../domain/types';
 import { daysBetween, fmtDate, fmtMoney, today } from '../domain/parse';
-import { daysOnMarket, editProperty, eventsOf } from '../domain/engine';
+import { daysOnMarket, editProperty, eventsOf, isStale } from '../domain/engine';
 import { priceSeries } from '../domain/stats';
 import { ChangeBadge, DemoPill, LineChart, StatusPill, Val } from './components';
 
@@ -31,14 +31,15 @@ export function Detail({ ctx, id }: { ctx: Ctx; id: string }) {
   return (
     <div className="stack">
       <a href="#dashboard" className="small">← Dashboard</a>
-      {p.isDemo && <div className="banner demo">This is a <b>fictional example</b> property for trying the app out.</div>}
+      {p.isDemo && <div className="banner demo">{p.demoKind === 'simulated' ? <>This property comes from a <b>simulated test email</b>, used to demonstrate automatic collection. It is not a real listing.</> : <>This is a <b>fictional example</b> property for trying the app out.</>}</div>}
+      {isStale(db, p, ctx.now) && <div className="banner info small">No source has mentioned this listing since {fmtDate(p.lastVerified)}. Alert emails only report new and changed listings, so its status is unconfirmed rather than changed.</div>}
       <div className="row">
         <div><h1>{p.address}</h1><div className="muted">{p.town}{p.postcode ? `, ${p.postcode}` : ''}</div></div>
         <span className="sp" />
         <button onClick={() => update({ watched: !p.watched })} aria-pressed={p.watched}>{p.watched ? '★ On watchlist' : '☆ Add to watchlist'}</button>
         <a className="btn" href={`#edit-${p.id}`}>Edit details or price</a>
       </div>
-      <div className="row"><StatusPill s={p.status} />{p.isDemo && <DemoPill />}<span className="price">{p.pricingBasis !== 'Unknown' ? p.pricingBasis + ' ' : ''}{fmtMoney(p.askingPrice)}</span><ChangeBadge db={db} p={p} /></div>
+      <div className="row"><StatusPill s={p.status} />{p.isDemo && <DemoPill kind={p.demoKind} />}<span className="price">{p.pricingBasis !== 'Unknown' ? p.pricingBasis + ' ' : ''}{fmtMoney(p.askingPrice)}</span><ChangeBadge db={db} p={p} /></div>
       {p.status === 'not_seen' && <div className="banner info">This listing was missing from a complete import. That does <b>not</b> mean it has sold: it may have been withdrawn, sold, or simply removed from that website. Confirm its status below if you find out.</div>}
       <div className="grid two">
         <div className="card">
@@ -70,7 +71,7 @@ export function Detail({ ctx, id }: { ctx: Ctx; id: string }) {
         <div className="card">
           <h2>Status history</h2>
           <ol className="tl" data-testid="timeline">
-            {evs.map((e) => <li key={e.id} className={`ev-${e.type}`}><b>{EVENT_LABEL[e.type]}</b> <span className="muted small">{fmtDate(e.date)}</span><br /><span className="small">{describe(e)}</span><br /><span className="small muted">Source: {e.origin}</span></li>)}
+            {evs.map((e) => <li key={e.id} className={`ev-${e.type}`}><b>{EVENT_LABEL[e.type]}</b> <span className="muted small">{fmtDate(e.date)}</span><br /><span className="small">{describe(e)}</span><br /><span className="small muted">{e.evidence ?? e.origin}{e.confidence && <> · <span title="How sure we are about this change">{CONFIDENCE_LABEL[e.confidence]}</span></>}</span></li>)}
           </ol>
           <details style={{ marginTop: 8 }}><summary>Record a status change</summary>
             <div className="row" style={{ marginTop: 8 }}>

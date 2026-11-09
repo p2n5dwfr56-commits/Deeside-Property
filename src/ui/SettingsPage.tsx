@@ -9,7 +9,7 @@ import { exportHistory, exportProperties } from '../domain/csv';
 import { addDemo, removeDemo } from '../domain/demo';
 import { download } from './components';
 
-export function SettingsPage({ ctx }: { ctx: Ctx }) {
+export function SettingsPage({ ctx, onSignOut }: { ctx: Ctx; onSignOut?: () => void }) {
   const { db } = ctx; const s = db.settings;
   const [name, setName] = useState(''); const [lat, setLat] = useState(''); const [lon, setLon] = useState('');
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
@@ -18,7 +18,7 @@ export function SettingsPage({ ctx }: { ctx: Ctx }) {
   const centre = s.towns.find((t) => t.name === 'Torphins');
   const n = (v: string) => (v.trim() === '' ? null : Number(v));
   const stamp = ctx.now;
-  const demoCount = db.properties.filter((p) => p.isDemo).length;
+  const demoCount = db.properties.filter((p) => p.isDemo && p.demoKind !== 'simulated').length;
   const addTown = () => {
     if (!name.trim()) return; if (s.towns.some((t) => t.name.toLowerCase() === name.trim().toLowerCase())) { setMsg({ ok: false, text: 'That location is already in the list.' }); return; }
     const la = Number(lat), lo = Number(lon); const hasPos = lat.trim() !== '' && lon.trim() !== '' && Number.isFinite(la) && Number.isFinite(lo);
@@ -56,11 +56,14 @@ export function SettingsPage({ ctx }: { ctx: Ctx }) {
             <label>Min bedrooms<input inputMode="numeric" defaultValue={s.criteria.minBeds ?? ''} onBlur={(e) => setS({ criteria: { ...s.criteria, minBeds: n(e.target.value) } })} /></label>
           </div>
           <div className="row small">{TYPES.filter((t) => t !== 'Unknown').map((t) => <label key={t} className="inline"><input type="checkbox" checked={s.criteria.types.includes(t)} onChange={(e) => setS({ criteria: { ...s.criteria, types: e.target.checked ? [...s.criteria.types, t] : s.criteria.types.filter((x) => x !== t) as PropertyType[] } })} />{t}</label>)}</div>
+          <label>Warn when a source has sent nothing for (days)<input inputMode="numeric" defaultValue={s.sourceQuietDays} onBlur={(e) => { const v = Number(e.target.value); if (v > 0) setS({ sourceQuietDays: v }); }} /></label>
+          <label>Flag listings not mentioned by any source for (days)<input inputMode="numeric" defaultValue={s.staleDays} onBlur={(e) => { const v = Number(e.target.value); if (v > 0) setS({ staleDays: v }); }} /></label>
           <p className="small muted">Leave everything blank to get no "new match" alerts. Price reductions, watched properties going under offer and properties coming back on the market always raise an alert.</p>
         </div>
       </div>
       <div className="card stack"><h2>Your data</h2>
-        <p className="small">Everything is saved in <b>this browser on this device</b> as you go, and survives refreshes and restarts. It is not yet synced online, so download a backup now and then (and before clearing your browser data).</p>
+        {ctx.cloud ? <p className="small">Everything is saved in your <b>private cloud database</b>, shared by your devices and the automatic checks. A backup file is still a good idea now and then.</p>
+          : <p className="small">This is the <b>offline preview</b>: data is saved in this browser on this device only. Download a backup now and then.</p>}
         <div className="row">
           <button className="primary" onClick={() => download(`deeside-property-backup-${stamp}.json`, backup(db), 'application/json')}>Download full backup</button>
           <label className="btn" style={{ display: 'inline-block' }}>Restore from backup…<input type="file" accept=".json,application/json" onChange={onRestore} style={{ display: 'none' }} /></label>
@@ -72,6 +75,7 @@ export function SettingsPage({ ctx }: { ctx: Ctx }) {
         <h3>Example data</h3>
         <div className="row">{demoCount ? <button onClick={() => { ctx.commit(removeDemo(db)); setMsg({ ok: true, text: `Removed ${demoCount} example properties. Your own data is untouched.` }); }}>Remove the {demoCount} example properties</button>
           : <button onClick={() => { ctx.commit(addDemo(db, ctx.now)); setMsg({ ok: true, text: 'Added 8 fictional example properties, marked "Example".' }); }}>Add example properties</button>}</div>
+        {onSignOut && <div><button onClick={onSignOut}>Sign out</button></div>}
         <details><summary>Delete everything</summary><p className="small">This removes all properties, history and settings from this browser.</p>
           {!wipe ? <button className="danger" onClick={() => setWipe(true)}>Delete all data…</button> : <div className="row"><span className="down small">This cannot be undone unless you have a backup.</span>
             <button className="danger" onClick={() => { ctx.commit(emptyDb()); setWipe(false); setMsg({ ok: true, text: 'All data deleted.' }); }}>Yes, delete everything</button><button onClick={() => setWipe(false)}>Cancel</button></div>}</details>

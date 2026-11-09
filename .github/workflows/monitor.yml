@@ -1,0 +1,56 @@
+# The unattended monitoring service: every 3 hours GitHub runs the automatic check (worker/run.ts), with no need
+# for the website or your computer to be open. Run it by hand from the Actions tab ("Run workflow").
+# Settings are GitHub secrets (Settings > Secrets and variables > Actions); none are stored in the code.
+name: Property monitor
+on:
+  schedule:
+    - cron: '7 */3 * * *'   # every 3 hours, at 7 minutes past (UTC)
+  workflow_dispatch:
+concurrency:
+  group: property-monitor
+  cancel-in-progress: false
+permissions:
+  contents: write           # only used to save results while no cloud database is set up (branch monitor-data)
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      HAS_DB: ${{ secrets.SUPABASE_URL != '' && secrets.SUPABASE_SECRET_KEY != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Load previous results (only while no cloud database is set up)
+        if: env.HAS_DB != 'true'
+        run: |
+          mkdir -p monitor-data
+          if git fetch -q origin monitor-data 2>/dev/null; then git archive FETCH_HEAD | tar -x -C monitor-data; fi
+      - name: Run the automatic check
+        run: npm run monitor -- --trigger ${{ github.event_name == 'schedule' && 'schedule' || 'manual' }}
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          IMAP_USER: ${{ secrets.IMAP_USER }}
+          IMAP_PASSWORD: ${{ secrets.IMAP_PASSWORD }}
+          IMAP_HOST: ${{ vars.IMAP_HOST }}
+          IMAP_FOLDER: ${{ vars.IMAP_FOLDER }}
+          SIMULATION: ${{ vars.SIMULATION }}
+          DIGEST_TO: ${{ secrets.DIGEST_TO }}
+          APP_URL: ${{ vars.APP_URL }}
+          DPW_STATE_FILE: ${{ github.workspace }}/monitor-data/state.json
+      - name: Save results (only while no cloud database is set up)
+        if: always() && env.HAS_DB != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd monitor-data
+          [ -f state.json ] || exit 0
+          git init -q -b monitor-data
+          if git fetch -q "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}" monitor-data 2>/dev/null; then git reset -q --soft FETCH_HEAD; fi
+          git add -A
+          git -c user.name="Property monitor" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -qm "Automatic check $(date -u +%Y-%m-%dT%H:%MZ)" || exit 0
+          git push -q "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}" HEAD:monitor-data

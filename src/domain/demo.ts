@@ -38,7 +38,9 @@ export function addDemo(db0: Db, now = new Date().toISOString().slice(0, 10)): D
   return { ...db, imports: db.imports.filter((i) => i.source !== 'Demonstration'), alerts: db.alerts.filter((a) => !db.properties.find((p) => p.id === a.propertyId)?.isDemo) };
 }
 
-export function removeDemo(db: Db): Db {
-  const ids = new Set(db.properties.filter((p) => p.isDemo).map((p) => p.id));
-  return { ...db, properties: db.properties.filter((p) => !ids.has(p.id)), events: db.events.filter((e) => !ids.has(e.propertyId)), alerts: db.alerts.filter((a) => !a.propertyId || !ids.has(a.propertyId)) };
-}
+const without = (db: Db, ids: Set<string>): Db => ({ ...db, properties: db.properties.filter((p) => !ids.has(p.id)), events: db.events.filter((e) => !ids.has(e.propertyId)),
+  alerts: db.alerts.filter((a) => !a.propertyId || !ids.has(a.propertyId)), reviews: (db.reviews ?? []).filter((r) => !ids.has(r.aId) && !ids.has(r.bId)) });
+/** Remove the fictional example properties (not simulated test data, not real data). */
+export function removeDemo(db: Db): Db { return without(db, new Set(db.properties.filter((p) => p.isDemo && p.demoKind !== 'simulated').map((p) => p.id))); }
+/** Remove properties created by the simulated test mailbox. Their notification log is kept for the record. */
+export function removeSimulated(db: Db): Db { return without(db, new Set(db.properties.filter((p) => p.demoKind === 'simulated').map((p) => p.id))); }
