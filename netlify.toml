@@ -1,6 +1,5 @@
 # Netlify: build the app and publish the dist folder. No secrets are needed for this version.
 [build]
-  base = "deeside-property-watch"
   command = "npm ci && npm test && npm run build"
   publish = "dist"
 [[headers]]

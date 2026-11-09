@@ -41,7 +41,8 @@ export interface SourceRef {
 
 export interface Property {
   id: string;
-  isDemo: boolean;         // demonstration data, always labelled as such
+  isDemo: boolean;         // not real data (example or simulated test), always labelled as such
+  demoKind?: 'example' | 'simulated';
   address: string;
   town: string;
   postcode: string | null;
@@ -71,13 +72,24 @@ export interface Property {
 export type EventType =
   | 'listed' | 'price_reduction' | 'price_increase' | 'basis_change'
   | 'closing_date' | 'under_offer' | 'missives' | 'sold' | 'withdrawn' | 'not_seen'
-  | 'returned_to_market' | 'relisted' | 'details_changed';
+  | 'returned_to_market' | 'relisted' | 'details_changed' | 'merged';
 
 export const EVENT_LABEL: Record<EventType, string> = {
   listed: 'New listing', price_reduction: 'Price reduced', price_increase: 'Price increased', basis_change: 'Pricing basis changed',
   closing_date: 'Closing date set', under_offer: 'Under offer', missives: 'Missives concluded', sold: 'Sold (confirmed)',
   withdrawn: 'Withdrawn', not_seen: 'No longer seen (unverified)', returned_to_market: 'Returned to market', relisted: 'Relisted',
-  details_changed: 'Details changed',
+  details_changed: 'Details changed', merged: 'Listings merged',
+};
+
+/** How sure we are about a change. */
+export type Confidence =
+  | 'reported'   // the source said so explicitly (e.g. an alert email showing "Under offer" or a price)
+  | 'detected'   // found by comparing two observations (e.g. a lower price than last time)
+  | 'manual'     // entered or confirmed by you
+  | 'assumed';   // inferred by the app (e.g. a listing seen again after dropping off); treat with care
+
+export const CONFIDENCE_LABEL: Record<Confidence, string> = {
+  reported: 'Reported by the source', detected: 'Detected by comparing notifications', manual: 'Entered by you', assumed: 'Assumed by the app (unconfirmed)',
 };
 
 /** One entry in a property's history. Nothing is ever deleted or overwritten. */
@@ -94,14 +106,18 @@ export interface PropertyEvent {
   statusBefore: Status | null;
   statusAfter: Status | null;
   changes: { field: string; before: unknown; after: unknown }[]; // for details_changed
-  origin: string;            // "Manual", "CSV: file.csv", "Email import", ...
+  origin: string;            // "Manual", "CSV: file.csv", "Rightmove email: ...", ...
   importId: string | null;
+  source?: string | null;     // which source the observation came from (ASPC, Rightmove, Manual, ...)
+  confidence?: Confidence;
+  evidence?: string | null;   // e.g. the email subject and date
+  messageId?: string | null;  // the email it came from
 }
 
 export interface ImportRecord {
   id: string;
   at: string;
-  kind: 'csv' | 'email' | 'manual' | 'backup';
+  kind: 'csv' | 'email' | 'manual' | 'backup' | 'api';
   label: string;            // file name or description
   source: string;
   snapshot: boolean;        // "this import lists everything currently for sale from this source in these towns"
@@ -117,8 +133,8 @@ export interface ImportRecord {
 export interface Alert {
   id: string;
   at: string;
-  propertyId: string;
-  kind: 'price_reduction' | 'watched_under_offer' | 'back_on_market' | 'new_match' | 'long_on_market';
+  propertyId: string | null;  // null for alerts about sources or the monitoring itself
+  kind: 'price_reduction' | 'watched_under_offer' | 'back_on_market' | 'new_match' | 'long_on_market' | 'source_quiet' | 'collection_failed' | 'review_needed';
   message: string;
   read: boolean;
 }
@@ -132,13 +148,73 @@ export interface Settings {
   radiusKm: number | null;     // optional: also include towns within this distance of Torphins
   criteria: Criteria;          // for "new property matching my criteria" alerts
   longOnMarketDays: number;    // alert threshold
+  sourceQuietDays: number;     // warn when a source has sent nothing for this many days
+  staleDays: number;           // flag active listings not seen in any notification for this many days
+}
+
+/** Two listings that might be the same property but could not be matched confidently. */
+export interface ReviewItem {
+  id: string;
+  at: string;
+  aId: string;               // the newer record
+  bId: string;               // the existing record it resembles
+  reasons: string[];
+  status: 'open' | 'merged' | 'separate';
+  resolvedAt: string | null;
+}
+
+/** One received notification (email) and what was done with it. The raw text is kept in the cloud database. */
+export interface MessageRecord {
+  messageId: string;
+  receivedAt: string;        // ISO timestamp from the email
+  processedAt: string;
+  source: string;            // Rightmove, Zoopla, OnTheMarket, ASPC, ... or "Not a property email"
+  from: string;
+  subject: string;
+  listings: number;          // listings read from it
+  created: number; updated: number; unchanged: number; flagged: number;
+  status: 'ok' | 'no_listings' | 'ignored' | 'error';
+  warnings: string[];
+  simulated: boolean;
+}
+
+/** One unattended monitoring run. */
+export interface RunRecord {
+  id: string;
+  startedAt: string;
+  finishedAt: string;
+  trigger: 'schedule' | 'manual' | 'test';
+  mailbox: string;           // "Gmail inbox" / "Simulated test mailbox" / both
+  ok: boolean;
+  messagesChecked: number;   // messages looked at in the mailbox
+  messagesNew: number;       // not seen before
+  listingsRead: number;
+  created: number; updated: number; unchanged: number; flagged: number;
+  errors: string[];
+}
+
+export interface SourceHealth {
+  source: string;
+  lastMessageAt: string | null;     // last notification received
+  lastListingsAt: string | null;    // last notification from which listings were read
+  lastFailureAt: string | null;
+  lastError: string | null;
+  messages: number;
+  listings: number;
+  failuresInRow: number;
+  quietAlertAt: string | null;      // when we last warned it had gone quiet
 }
 
 export interface Db {
-  version: 1;
+  version: 2;
   properties: Property[];
   events: PropertyEvent[];
   imports: ImportRecord[];
   alerts: Alert[];
   settings: Settings;
+  reviews: ReviewItem[];
+  messages: MessageRecord[];
+  runs: RunRecord[];
+  sources: Record<string, SourceHealth>;
+  simulation: { startedAt: string | null };
 }

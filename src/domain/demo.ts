@@ -40,5 +40,5 @@ export function addDemo(db0: Db, now = new Date().toISOString().slice(0, 10)): D
 
 export function removeDemo(db: Db): Db {
   const ids = new Set(db.properties.filter((p) => p.isDemo).map((p) => p.id));
-  return { ...db, properties: db.properties.filter((p) => !ids.has(p.id)), events: db.events.filter((e) => !ids.has(e.propertyId)), alerts: db.alerts.filter((a) => !ids.has(a.propertyId)) };
+  return { ...db, properties: db.properties.filter((p) => !ids.has(p.id)), events: db.events.filter((e) => !ids.has(e.propertyId)), alerts: db.alerts.filter((a) => !a.propertyId || !ids.has(a.propertyId)) };
 }

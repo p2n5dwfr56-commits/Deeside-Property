@@ -2,7 +2,7 @@
 import type { Ctx } from './App';
 import type { Alert } from '../domain/types';
 
-const KIND: Record<Alert['kind'], string> = { price_reduction: 'Price reduced', watched_under_offer: 'Watched property under offer', back_on_market: 'Back on the market', new_match: 'New match for your criteria', long_on_market: 'Long on the market' };
+const KIND: Record<Alert['kind'], string> = { price_reduction: 'Price reduced', watched_under_offer: 'Watched property under offer', back_on_market: 'Back on the market', new_match: 'New match for your criteria', long_on_market: 'Long on the market', source_quiet: 'A source has gone quiet', collection_failed: 'Automatic check failed', review_needed: 'Possible duplicate to check' };
 
 export function Alerts({ ctx }: { ctx: Ctx }) {
   const { db } = ctx; const unread = db.alerts.filter((a) => !a.read).length;
