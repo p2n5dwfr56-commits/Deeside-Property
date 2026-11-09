@@ -1,0 +1,18 @@
+From: Simulated Zoopla alert <test@dpw-simulated.invalid>
+To: property-alerts@simulated.invalid
+Subject: [SIMULATED TEST] 1 new home for sale in Banchory
+Date: Mon, 1 Jan 2026 00:00:00 +0000
+Message-ID: <03-zoopla-new@dpw-simulated.invalid>
+X-DPW-Simulated: 1
+X-DPW-Deliver-After-Hours: 3
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<html><body><table><tr><td><b>SIMULATED TEST EMAIL</b> for Deeside Property Watch. Not a real notification.</td></tr>
+<tr><td><a href="https://click.simulated-tracker.invalid/c?u=https%3A%2F%2Fwww.zoopla.co.uk%2Ffor-sale%2Fdetails%2F999300001%2F%3Fsearch_identifier%3Dx"><img src="cid:photo" alt="" width="200"></a></td></tr>
+<tr><td><a href="https://click.simulated-tracker.invalid/c?u=https%3A%2F%2Fwww.zoopla.co.uk%2Ffor-sale%2Fdetails%2F999300001%2F%3Fsearch_identifier%3Dx">17 Station Road, Banchory AB31 5ZZ</a></td></tr>
+<tr><td>£325,000</td></tr>
+<tr><td>4 bedroom detached house</td></tr>
+
+<tr><td>You are receiving this simulated email because test mode is on. Unsubscribe | Manage your alerts | Sold house prices</td></tr>
+</table></body></html>

@@ -1,0 +1,18 @@
+From: Simulated Rightmove alert <test@dpw-simulated.invalid>
+To: property-alerts@simulated.invalid
+Subject: [SIMULATED TEST] A property you saved is back on the market
+Date: Mon, 1 Jan 2026 00:00:00 +0000
+Message-ID: <07-rightmove-back@dpw-simulated.invalid>
+X-DPW-Simulated: 1
+X-DPW-Deliver-After-Hours: 48
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<html><body><table><tr><td><b>SIMULATED TEST EMAIL</b> for Deeside Property Watch. Not a real notification.</td></tr>
+<tr><td><a href="https://click.simulated-tracker.invalid/c?u=https%3A%2F%2Fwww.rightmove.co.uk%2Fproperties%2F999000103%23%2F%3Fchannel%3DRES_BUY"><img src="cid:photo" alt="" width="200"></a></td></tr>
+<tr><td><a href="https://click.simulated-tracker.invalid/c?u=https%3A%2F%2Fwww.rightmove.co.uk%2Fproperties%2F999000103%23%2F%3Fchannel%3DRES_BUY">4 Golf Road, Aboyne, AB34 5ZZ</a></td></tr>
+<tr><td>Offers over £235,000</td></tr>
+<tr><td>3 bedroom bungalow</td></tr>
+<tr><td>Back on the market</td></tr>
+<tr><td>You are receiving this simulated email because test mode is on. Unsubscribe | Manage your alerts | Sold house prices</td></tr>
+</table></body></html>

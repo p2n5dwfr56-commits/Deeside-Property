@@ -40,7 +40,10 @@ export function identifySource(from: string, body: string, agentDomains: Record<
   for (const [d, n] of Object.entries({ ...KNOWN_SENDERS, ...agentDomains })) if (dom === d || dom.endsWith('.' + d)) return n;
   const links = [...body.matchAll(/href\s*=\s*["']([^"']+)["']/gi)].map((m) => decodeLink(m[1])).join(' ') + ' ' + body;
   const counts = PORTALS.map((p) => ({ p, n: (links.match(new RegExp(p.listing.source, 'gi')) || []).length })).sort((a, b) => b.n - a.n);
-  return counts[0].n > 0 ? counts[0].p.name : null;
+  if (counts[0].n > 0) return counts[0].p.name;
+  // no listing links (e.g. a changed layout): fall back to any link to a portal, so the failure is reported for that source
+  const byDomain = PORTALS.map((p) => ({ p, n: (links.match(new RegExp(p.domains.source, 'gi')) || []).length })).sort((a, b) => b.n - a.n);
+  return byDomain[0].n > 0 ? byDomain[0].p.name : null;
 }
 
 /** Scottish and portal status wording -> our status (with the original words kept as evidence). */

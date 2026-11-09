@@ -21,7 +21,8 @@ export const emptyDb = (): Db => ({ version: 2, properties: [], events: [], impo
 export function migrate(raw: unknown): Db | null {
   const d = raw as Record<string, unknown> | null;
   if (!d || (d.version !== 1 && d.version !== 2) || !Array.isArray(d.properties) || !Array.isArray(d.events) || !Array.isArray(d.imports) || !Array.isArray(d.alerts) || !d.settings) return null;
-  const e = emptyDb(); const db = { ...e, ...d, version: 2 } as Db;
+  const e = emptyDb(); const defined = Object.fromEntries(Object.entries(d).filter(([, v]) => v !== undefined && v !== null));
+  const db = { ...e, ...defined, version: 2 } as Db;
   db.settings = { ...e.settings, ...(d.settings as object) };
   db.properties = db.properties.map((p) => (p.isDemo && !p.demoKind ? { ...p, demoKind: 'example' as const } : p));
   return db;

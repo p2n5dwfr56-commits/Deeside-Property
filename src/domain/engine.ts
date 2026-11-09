@@ -218,7 +218,7 @@ export function importObservations(db0: Db, rows: { obs: Observation | null; err
   db.alerts.unshift(...alertsFor(db, newEvents));
   for (const rv of newReviews) {
     const a = db.properties.find((x) => x.id === rv.aId)!, b = db.properties.find((x) => x.id === rv.bId)!;
-    if (!a.isDemo || !b.isDemo || a.demoKind === 'simulated') db.alerts.unshift({ id: uid(), at: new Date().toISOString(), propertyId: a.id, kind: 'review_needed', message: `Possible duplicate: "${a.address}, ${a.town}" (${opt.source}) may be the same as "${b.address}, ${b.town}". Please check.`, read: false });
+    if (!a.isDemo || !b.isDemo || a.demoKind === 'simulated') db.alerts.unshift({ id: uid(), at: new Date().toISOString(), propertyId: a.id, kind: 'review_needed', message: `${a.demoKind === 'simulated' ? '[Simulated test] ' : ''}Possible duplicate: "${a.address}, ${a.town}" (${opt.source}) may be the same as "${b.address}, ${b.town}". Please check.`, read: false });
   }
   return { db, report, touched: [...seen] };
 }

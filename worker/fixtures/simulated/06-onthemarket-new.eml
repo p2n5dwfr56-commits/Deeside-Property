@@ -1,0 +1,18 @@
+From: Simulated OnTheMarket alert <test@dpw-simulated.invalid>
+To: property-alerts@simulated.invalid
+Subject: [SIMULATED TEST] New property in Ballater
+Date: Mon, 1 Jan 2026 00:00:00 +0000
+Message-ID: <06-onthemarket-new@dpw-simulated.invalid>
+X-DPW-Simulated: 1
+X-DPW-Deliver-After-Hours: 24
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<html><body><table><tr><td><b>SIMULATED TEST EMAIL</b> for Deeside Property Watch. Not a real notification.</td></tr>
+<tr><td><a href="https://www.onthemarket.com/details/999400001/"><img src="cid:photo" alt="" width="200"></a></td></tr>
+<tr><td><a href="https://www.onthemarket.com/details/999400001/">The Old Manse, Ballater, AB35 5ZZ</a></td></tr>
+<tr><td>Offers over £410,000</td></tr>
+<tr><td>5 bedroom detached house</td></tr>
+
+<tr><td>You are receiving this simulated email because test mode is on. Unsubscribe | Manage your alerts | Sold house prices</td></tr>
+</table></body></html>

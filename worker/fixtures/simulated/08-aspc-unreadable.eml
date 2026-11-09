@@ -1,0 +1,14 @@
+From: Simulated ASPC alert <test@dpw-simulated.invalid>
+To: property-alerts@simulated.invalid
+Subject: [SIMULATED TEST] Your weekly ASPC update
+Date: Mon, 1 Jan 2026 00:00:00 +0000
+Message-ID: <08-aspc-unreadable@dpw-simulated.invalid>
+X-DPW-Simulated: 1
+X-DPW-Deliver-After-Hours: 48
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<html><body><table><tr><td><b>SIMULATED TEST EMAIL</b> for Deeside Property Watch. Not a real notification.</td></tr>
+<tr><td>We have changed the layout of this email. <a href="https://www.aspc.co.uk/">Visit ASPC</a></td></tr>
+
+</table></body></html>

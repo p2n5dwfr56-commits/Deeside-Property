@@ -1,0 +1,22 @@
+From: Simulated ASPC alert <test@dpw-simulated.invalid>
+To: property-alerts@simulated.invalid
+Subject: [SIMULATED TEST] New properties matching your search
+Date: Mon, 1 Jan 2026 00:00:00 +0000
+Message-ID: <02-aspc-new@dpw-simulated.invalid>
+X-DPW-Simulated: 1
+X-DPW-Deliver-After-Hours: 0
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<html><body><table><tr><td><b>SIMULATED TEST EMAIL</b> for Deeside Property Watch. Not a real notification.</td></tr>
+<tr><td><a href="https://www.aspc.co.uk/property/999201"><img src="cid:photo" alt="" width="200"></a></td></tr>
+<tr><td><a href="https://www.aspc.co.uk/property/999201">12 Burnett Rd, Torphins, AB31 4ZZ</a></td></tr>
+<tr><td>Offers Over £285,000</td></tr>
+<tr><td>3 bedroom detached villa</td></tr>
+<tr><td><a href="https://www.aspc.co.uk/property/999202"><img src="cid:photo" alt="" width="200"></a></td></tr>
+<tr><td><a href="https://www.aspc.co.uk/property/999202">Hillview Cottage, Lumphanan, AB31 4ZY</a></td></tr>
+<tr><td>Fixed Price £195,000</td></tr>
+<tr><td>2 bedroom cottage</td></tr>
+
+<tr><td>You are receiving this simulated email because test mode is on. Unsubscribe | Manage your alerts | Sold house prices</td></tr>
+</table></body></html>
