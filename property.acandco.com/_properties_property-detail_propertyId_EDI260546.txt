@@ -1,0 +1,1834 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>95 Gilmerton Dykes Road, Edinburgh, EH17 8PD | Aberdein Considine</title>
+        <meta name="description" content="Located on the fringes of the popular Gilmerton Dykes area of Edinburgh is this well-presented semi-detached house which provides bright and spacious accommodation with large south facing garden.&#xD;&#xD;With gas central heating and double glazed windows, the house also benefits from solar panels.&#xD;&#xD;The accommodation includes an entrance hallway with understairs cupboard and to the front is a good sized lounge with feature fireplace.  The dining kitchen is fitted with a range of base and wall units with there are two windows and door leading to the garden.  Upstairs there are two storage cupboards on the landing and there are two large bedrooms with fitted wardrobes.  The shower room has a double shower and window to rear.&#xD;&#xD;Externally there are front and rear gardens and to the side is a driveway providing off street parking leading to the garage.  The large south facing rear garden is mainly laid to lawn and enjoys a great degree of privacy.  &#xD;&#xD;Early viewing of this lovely family home is essential.&#xD;&#xD;Set to the south east of the city centre, the popular residential area of Gilmerton has an excellent range of amenities including a fine range of shops, a choice of supermarkets, regular bus services and both primary and secondary schools nearby.  The Royal Infirmary is located nearby and the area has excellent transport links to the city centre, Straiton retail park and the City Bypass." />
+        <meta name="keywords" content="" />
+
+
+
+
+
+
+    <meta property="og:url" content="/properties/property-detail/" />
+
+
+
+
+        <!--Head Scripts -->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-55PGVNZ');</script>
+<!-- End Google Tag Manager -->
+
+
+<!-- Wealth to Legal new code -->
+<script>
+(function () {
+  // --- Helpers ---
+  function qs(name) {
+    return new URLSearchParams(window.location.search).get(name) || "";
+  }
+
+  function hasAnyParamMatch() {
+    const from = qs("from").toLowerCase();
+    const utmSource = qs("utm_source").toLowerCase();
+    const utmMedium = qs("utm_medium").toLowerCase();
+    const utmCampaign = qs("utm_campaign").toLowerCase();
+
+    // Adjust these rules to match what you actually see in analytics
+    return (
+      from === "acwealth" ||
+      utmSource === "acwealth" ||
+      utmCampaign.includes("acwealth") ||
+      utmMedium.includes("acwealth")
+    );
+  }
+
+  const ref = document.referrer || "";
+  const cameFromWealthViaReferrer = ref.includes("acwealth.co.uk");
+
+  const shouldShow =
+    cameFromWealthViaReferrer || hasAnyParamMatch();
+
+  if (!shouldShow) return;
+
+  // Use localStorage so it persists across tabs/sessions
+  if (localStorage.getItem("wealthPopupAccepted") === "true") return;
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const style = document.createElement("style");
+    style.textContent = `
+      #popupOverlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999999;
+        padding: 1em;
+        box-sizing: border-box;
+      }
+      .popupBox {
+        background: #fff;
+        padding: 1.5em;
+        border-radius: 10px;
+        max-width: 420px;
+        width: 100%;
+        font-family: sans-serif;
+        text-align: center;
+      }
+      .popupBox p { margin-bottom: 1em; font-size: 1rem; }
+      .popupBox button {
+        margin: .5em;
+        padding: .6em 1.4em;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .popupAccept { background:#4CAF50;color:#fff; }
+      .popupLeave  { background:#f44336;color:#fff; }
+    `;
+    document.head.appendChild(style);
+
+    const popup = document.createElement("div");
+    popup.id = "popupOverlay";
+    popup.innerHTML = `
+      <div class="popupBox">
+        <p>You are now entering the website of Aberdein Considine LLP. FCA Registration No: 1012485, SRA Registration No: 8011453.</p>
+        <p>Please accept to continue or leave this site.</p>
+        <button class="popupAccept">Accept</button>
+        <button class="popupLeave">Leave this site</button>
+      </div>
+    `;
+    document.body.appendChild(popup);
+
+    popup.querySelector(".popupAccept").onclick = () => {
+      localStorage.setItem("wealthPopupAccepted", "true");
+      popup.remove();
+    };
+
+    popup.querySelector(".popupLeave").onclick = () => {
+      window.location.href = "https://www.google.co.uk";
+    };
+  });
+})();
+</script>
+
+
+
+
+
+<!-- Wealth → Legal Popup Trigger Old code
+<script>
+(function () {
+
+  // Helper to read a cookie by name
+  function hasCookie(name) {
+    return document.cookie.split(";").some(function (c) {
+      return c.trim().startsWith(name + "=");
+    });
+  }
+
+  const cameFromWealth = hasCookie("cameFromWealth");
+  const alreadyAccepted = localStorage.getItem("wealthPopupAccepted") === "true";
+
+  // If they didn't come from Wealth or have already accepted, do nothing
+  if (!cameFromWealth || alreadyAccepted) return;
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    // Inject styles
+    const style = document.createElement("style");
+    style.textContent = `
+      #popupOverlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999999;
+        padding: 1em;
+        box-sizing: border-box;
+      }
+      .popupBox {
+        background: #fff;
+        padding: 1.5em;
+        border-radius: 10px;
+        max-width: 420px;
+        width: 100%;
+        font-family: sans-serif;
+        text-align: center;
+      }
+      .popupBox p { margin-bottom: 1em; font-size: 1rem; }
+      .popupBox button {
+        margin: .5em;
+        padding: .6em 1.4em;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .popupAccept { background:#4CAF50;color:#fff; }
+      .popupLeave  { background:#f44336;color:#fff; }
+    `;
+    document.head.appendChild(style);
+
+    // Build popup HTML
+    const popup = document.createElement("div");
+    popup.id = "popupOverlay";
+    popup.innerHTML = `
+      <div class="popupBox">
+        <p>You are now entering the website of Aberdein Considine LLP. FCA Registration No: 1012485, SRA Registration No: 8011453.</p>
+        <p>Please accept to continue or leave this site.</p>
+        <button class="popupAccept">Accept</button>
+        <button class="popupLeave">Leave this site</button>
+      </div>
+    `;
+    document.body.appendChild(popup);
+
+    // Button actions
+    popup.querySelector(".popupAccept").onclick = () => {
+      localStorage.setItem("wealthPopupAccepted", "true");
+      // Clear the marker cookie so it doesn't trigger again in future
+      document.cookie = "cameFromWealth=; path=/; domain=.acandco.com; Max-Age=0";
+      popup.remove();
+    };
+
+    popup.querySelector(".popupLeave").onclick = () => {
+      window.location.href = "https://www.google.co.uk";
+    };
+  });
+
+})();
+</script> -->
+        <!--Cookie Policy-->
+        <!--Google Tag Manager-->
+        <script>
+
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl + '#'; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', '#');
+        </script>
+    
+
+    <!-- Open Sans Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" crossorigin href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open&#x2B;Sans&amp;display=swap">
+
+    <!-- Compiled Assets -->
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="/css/rte_stylesheet.css">
+    <script defer src="/assets/js/app.js"></script>
+    <script defer="defer" src="/App_Plugins/UmbracoForms/Assets/promise-polyfill/dist/polyfill.min.js?v=13.4.1" type="application/javascript"></script><script defer="defer" src="/App_Plugins/UmbracoForms/Assets/aspnet-client-validation/dist/aspnet-validation.min.js?v=13.4.1" type="application/javascript"></script>
+    
+
+    
+			<script type="application/ld+json">
+				{"@context":"https://schema.org","@type":"RealEstateListing","name":"95 Gilmerton Dykes Road, Edinburgh, EH17 8PD","description":"Located on the fringes of the popular Gilmerton Dykes area of Edinburgh is this well-presented semi-detached house which provides bright and spacious accommodation with large south facing garden.\r\rWith gas central heating and double glazed windows, the house also benefits from solar panels.\r\rThe accommodation includes an entrance hallway with understairs cupboard and to the front is a good sized lounge with feature fireplace.  The dining kitchen is fitted with a range of base and wall units with there are two windows and door leading to the garden.  Upstairs there are two storage cupboards on the landing and there are two large bedrooms with fitted wardrobes.  The shower room has a double shower and window to rear.\r\rExternally there are front and rear gardens and to the side is a driveway providing off street parking leading to the garage.  The large south facing rear garden is mainly laid to lawn and enjoys a great degree of privacy.  \r\rEarly viewing of this lovely family home is essential.\r\rSet to the south east of the city centre, the popular residential area of Gilmerton has an excellent range of amenities including a fine range of shops, a choice of supermarkets, regular bus services and both primary and secondary schools nearby.  The Royal Infirmary is located nearby and the area has excellent transport links to the city centre, Straiton retail park and the City Bypass.","url":"https://property.acandco.com/properties/property-detail?propertyId=EDI260546","image":["https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_01.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_14.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_15.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_06.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_07.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_12.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_13.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_11.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_17.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_02.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_03.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_04.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_05.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_16.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_08.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_09.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_10.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_19.jpg","https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_20.png"],"mainEntity":{"@type":"SingleFamilyResidence","address":{"@type":"PostalAddress","streetAddress":"95 Gilmerton Dykes Road","addressLocality":"Edinburgh","addressRegion":"","postalCode":"EH17 8PD","addressCountry":"GB"},"geo":{"@type":"GeoCoordinates","latitude":"55.899616","longitude":"-3.141209"}},"offers":{"@type":"Offer","price":"220000.00","priceCurrency":"GBP","availability":"https://schema.org/InStock","itemOffered":{"@type":"SingleFamilyResidence","numberOfRooms":1,"numberOfBedrooms":2,"numberOfBathroomsTotal":1,"floorSize":{"@type":"QuantitativeValue","value":"0.0","unitText":"squareFeet"}}},"datePosted":"2026-10-07"}
+			</script>
+
+</head>
+<body class="font-opensans">
+    
+
+<header class="site-header sticky top-0 bg-white py-6 z-10 lg:py-8">
+    <div class="container flex items-center gap-6">
+
+                <a href="/" class="flex">
+            <img
+                src="/media/qyml23cn/ac-logo.svg"
+                alt="Aberdein Considine"
+                class="block object-contain object-left w-[120px] h-[45.52px]  lg:w-[232px] lg:h-[88px]"
+            />
+        </a>
+
+
+        <a
+            href="#main"
+            class="sr-only !absolute top-px text-grey-dark lg:top-1 focus:not-sr-only"
+        >
+            Skip to main content
+        </a>
+
+            <div class="hidden xl:block">
+                <button class="flex items-center gap-8 text-lg text-grey-dark tracking-wide px-7"
+                        id="site-selector-toggle"
+                        aria-expanded="false"
+                        aria-controls="site-selector"
+                        aria-label="site selector">
+                    Home
+                    <svg class="w-3 h-3 text-grey-dark"
+                         aria-hidden="true">
+                        <use xlink:href="/assets/svg/spritesheet.svg#arrow-down-icon"></use>
+                    </svg>
+                </button>
+                <div id="site-selector"
+                     class="absolute top-[152px] w-[200px] bg-white rounded-b overflow-hidden invisible opacity-0"
+                     aria-labelledby="site-selector-toggle">
+                    <ul>
+                            <li>
+                                <a href="https://legal.acandco.com"
+                                   class="flex items-center min-h-10 text-lg text-grey-dark tracking-wide bg-white py-1 pl-7 pr-2 transition-colors hover:bg-grey-dark hover:text-white">
+                                    Legal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.acandco.com"
+                                   class="flex items-center min-h-10 text-lg text-grey-dark tracking-wide bg-white py-1 pl-7 pr-2 transition-colors hover:bg-grey-dark hover:text-white">
+                                    Firm
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        <nav
+            aria-label="main navigation"
+            class="flex items-center gap-6 order-1 lg:relative lg:grow lg:gap-12 lg:order-none "
+        >
+
+            <button 
+                class="group flex lg:hidden"
+                id="main-nav-toggle"
+                aria-label="main menu"
+                aria-expanded="false"
+                aria-controls="main-nav"
+            >
+                <svg 
+                    class="w-11 h-5 text-grey-dark group-aria-expanded:hidden"
+                    aria-hidden="true"
+                >
+                    <use xlink:href="/assets/svg/spritesheet.svg#menu-icon"></use>
+                </svg>
+                <svg 
+                    class="hidden w-11 h-5 text-grey-dark group-aria-expanded:block"
+                    aria-hidden="true"
+                >
+                    <use xlink:href="/assets/svg/spritesheet.svg#close-icon"></use>
+                </svg>
+            </button>
+
+                <div
+                    id="main-nav"
+                    aria-labelledby="main-nav-toggle"
+                    class="absolute top-full left-0 right-0 bg-white h-[calc(100svh-93.52px)] invisible opacity-0 overflow-y-auto lg:block lg:static lg:h-auto lg:ml-auto lg:mr-6 lg:bg-transparent lg:visible lg:opacity-100 lg:transition-none lg:overflow-visible"
+                >
+                    <ul class="container flex flex-col pt-[75px] pb-10 lg:relative lg:flex-row lg:gap-8 lg:p-0 lg:m-0 lg:w-auto">
+                            <li>
+                                    <button
+                                        class="nav-btn group/nav-item"
+                                        id="sub-nav-trigger-f7646db3-c25d-4485-a5bf-e314327699c4"
+                                        aria-expanded="false"
+                                        aria-controls="sub-nav-f7646db3-c25d-4485-a5bf-e314327699c4"
+                                    >
+                                        Buying
+                                        <svg
+                                            class="w-4 h-4 text-grey-dark transition-transform duration-300 group-aria-expanded/nav-item:-rotate-180 lg:hidden"
+                                            aria-hidden="true"
+                                        >
+                                            <use xlink:href="/assets/svg/spritesheet.svg#chevron-down-icon"></use>
+                                        </svg>
+                                    </button>
+                                    <div
+                                        id="sub-nav-f7646db3-c25d-4485-a5bf-e314327699c4"
+                                        aria-labelledby="sub-nav-trigger-f7646db3-c25d-4485-a5bf-e314327699c4"
+                                        class="invisible opacity-0 grid grid-rows-[0fr] [&.visible]:grid-rows-[1fr] overflow-hidden lg:absolute lg:top-[87px] lg:left-0 lg:right-0 lg:overflow-visible lg:grid-rows-[1fr]"
+                                    >
+                                        <div class="sub-nav-bg hidden lg:block fixed top-[152px] left-0 h-10 w-full bg-white -z-10"></div>
+                                        <ul class="flex flex-col gap-4 overflow-hidden lg:gap-6 lg:py-7 lg:overflow-visible">
+                                            <li class="pt-6 lg:pt-0">
+                                                <a
+                                                    class="block text-md text-grey-dark lg:inline-block"
+                                                    href="/buying/"
+                                                >
+                                                    Buying
+                                                </a>
+                                            </li>
+                                                <li>
+                                                    <a
+                                                        class="block text-md text-grey-dark lg:inline-block"
+                                                        href="/mortgages/"
+                                                    >
+                                                        Mortgages
+                                                    </a>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </li>
+                            <li>
+                                    <a
+                                        href="/selling/"
+                                        class="nav-btn"
+                                    >
+                                        Selling
+                                    </a>
+                            </li>
+                            <li>
+                                    <button
+                                        class="nav-btn group/nav-item"
+                                        id="sub-nav-trigger-e9eb607c-bfc1-482a-a192-c1d07d95e36b"
+                                        aria-expanded="false"
+                                        aria-controls="sub-nav-e9eb607c-bfc1-482a-a192-c1d07d95e36b"
+                                    >
+                                        New Builds
+                                        <svg
+                                            class="w-4 h-4 text-grey-dark transition-transform duration-300 group-aria-expanded/nav-item:-rotate-180 lg:hidden"
+                                            aria-hidden="true"
+                                        >
+                                            <use xlink:href="/assets/svg/spritesheet.svg#chevron-down-icon"></use>
+                                        </svg>
+                                    </button>
+                                    <div
+                                        id="sub-nav-e9eb607c-bfc1-482a-a192-c1d07d95e36b"
+                                        aria-labelledby="sub-nav-trigger-e9eb607c-bfc1-482a-a192-c1d07d95e36b"
+                                        class="invisible opacity-0 grid grid-rows-[0fr] [&.visible]:grid-rows-[1fr] overflow-hidden lg:absolute lg:top-[87px] lg:left-0 lg:right-0 lg:overflow-visible lg:grid-rows-[1fr]"
+                                    >
+                                        <div class="sub-nav-bg hidden lg:block fixed top-[152px] left-0 h-10 w-full bg-white -z-10"></div>
+                                        <ul class="flex flex-col gap-4 overflow-hidden lg:gap-6 lg:py-7 lg:overflow-visible">
+                                            <li class="pt-6 lg:pt-0">
+                                                <a
+                                                    class="block text-md text-grey-dark lg:inline-block"
+                                                    href="/new-build/"
+                                                >
+                                                    New Builds
+                                                </a>
+                                            </li>
+                                                <li>
+                                                    <a
+                                                        class="block text-md text-grey-dark lg:inline-block"
+                                                        href="/new-build/for-developers/"
+                                                    >
+                                                        For Developers
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        class="block text-md text-grey-dark lg:inline-block"
+                                                        href="/new-build/for-buyers/"
+                                                    >
+                                                        For Buyers
+                                                    </a>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </li>
+                            <li>
+                                    <a
+                                        href="/properties/"
+                                        class="nav-btn"
+                                    >
+                                        Property Search
+                                    </a>
+                            </li>
+                            <li>
+                                    <button
+                                        class="nav-btn group/nav-item"
+                                        id="sub-nav-trigger-d5a1b7c8-76b9-4766-9d3a-11f5e2308233"
+                                        aria-expanded="false"
+                                        aria-controls="sub-nav-d5a1b7c8-76b9-4766-9d3a-11f5e2308233"
+                                    >
+                                        About Us
+                                        <svg
+                                            class="w-4 h-4 text-grey-dark transition-transform duration-300 group-aria-expanded/nav-item:-rotate-180 lg:hidden"
+                                            aria-hidden="true"
+                                        >
+                                            <use xlink:href="/assets/svg/spritesheet.svg#chevron-down-icon"></use>
+                                        </svg>
+                                    </button>
+                                    <div
+                                        id="sub-nav-d5a1b7c8-76b9-4766-9d3a-11f5e2308233"
+                                        aria-labelledby="sub-nav-trigger-d5a1b7c8-76b9-4766-9d3a-11f5e2308233"
+                                        class="invisible opacity-0 grid grid-rows-[0fr] [&.visible]:grid-rows-[1fr] overflow-hidden lg:absolute lg:top-[87px] lg:left-0 lg:right-0 lg:overflow-visible lg:grid-rows-[1fr]"
+                                    >
+                                        <div class="sub-nav-bg hidden lg:block fixed top-[152px] left-0 h-10 w-full bg-white -z-10"></div>
+                                        <ul class="flex flex-col gap-4 overflow-hidden lg:gap-6 lg:py-7 lg:overflow-visible">
+                                            <li class="pt-6 lg:pt-0">
+                                                <a
+                                                    class="block text-md text-grey-dark lg:inline-block"
+                                                    href="/about/"
+                                                >
+                                                    About Us
+                                                </a>
+                                            </li>
+                                                <li>
+                                                    <a
+                                                        class="block text-md text-grey-dark lg:inline-block"
+                                                        href="/offices/"
+                                                    >
+                                                        Offices
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        class="block text-md text-grey-dark lg:inline-block"
+                                                        href="/latest-news/"
+                                                    >
+                                                        News
+                                                    </a>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </li>
+                            <li>
+                                    <a
+                                        href="/forms/get-in-touch/"
+                                        class="nav-btn"
+                                    >
+                                        Get in Touch
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+        </nav>
+
+            <div class="ml-auto">
+                <button class="group flex"
+                        id="site-search-toggle"
+                        aria-label="site search"
+                        aria-expanded="false"
+                        aria-controls="site-search">
+                    <svg class="w-5 h-5 text-grey-dark group-aria-expanded:hidden lg:group-aria-expanded:block"
+                         aria-hidden="true">
+                        <use xlink:href="/assets/svg/spritesheet.svg#search-icon"></use>
+                    </svg>
+                    <svg class="hidden w-5 h-5 text-grey-dark group-aria-expanded:block lg:group-aria-expanded:hidden"
+                         aria-hidden="true">
+                        <use xlink:href="/assets/svg/spritesheet.svg#close-icon"></use>
+                    </svg>
+                </button>
+                <form action="/search" id="site-search" class="absolute top-full left-0 right-0 bg-white h-[calc(100svh-93.52px)] invisible opacity-0 lg:h-auto" aria-labelledby="site-search-toggle">
+                    <div class="container flex items-center gap-6 border-b border-b-grey-lightest pt-10 pb-11 lg:py-12 lg:border-b-0">
+                        <svg class="w-5 h-5 text-grey-dark"
+                             aria-hidden="true">
+                            <use xlink:href="/assets/svg/spritesheet.svg#search-icon"></use>
+                        </svg>
+                        <input id="searchTerm"
+                               name="searchTerm"
+                               type="text"
+                               class="grow text-md text-grey-dark caret-grey-dark outline-none"
+                               placeholder="Search"
+                               aria-label="site search" />
+                        <button type="reset"
+                                aria-label="clear search"
+                                class="hidden lg:flex">
+                            <svg class="w-4 h-4 text-grey-dark"
+                                 aria-hidden="true">
+                                <use xlink:href="/assets/svg/spritesheet.svg#close-icon"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+    </div>
+</header>
+    <main id="main">
+        
+
+
+<div>
+	<nav class="bg-grey-lightest" aria-label="breadcrumb">
+		<div class="container py-3">
+			<button
+				class="flex items-center gap-2 text-grey-dark text-md whitespace-nowrap"
+				onclick="history.back()"
+			>
+				<svg class="w-4 h-4 shrink-0 -scale-x-100" aria-hidden="true">
+					<use xlink:href="/assets/svg/spritesheet.svg#chevron-right-icon"></use>
+				</svg>
+				<span>Back to search results</span>
+			</button>
+		</div>
+	</nav>
+
+	<section class="bg-purple">
+		<div class="container overflow-hidden">
+				<div class="property-carousels !-mx-container-small lg:!-mx-container-large lg:overflow-hidden lg:aspect-[1512/755] lg:grid lg:grid-cols-[75%,1fr] lg:grid-rows-[min-content] lg:gap-3">
+					<div class="property-carousel swiper w-svw aspect-property-image lg:w-full">
+
+						<div class="absolute bottom-7 left-container-small right-11 z-10 flex items-center justify-between gap-4 lg:bottom-9 lg:right-10 lg:left-container-large">
+							<div class="flex items-center gap-3">
+								<button class="prev flex rounded-circle w-[50px] h-[50px] bg-white text-grey-dark">
+									<span class="sr-only">previous property image</span>
+									<svg class="w-4 h-4 m-auto -scale-x-100" aria-hidden="true">
+										<use xlink:href="/assets/svg/spritesheet.svg#chevron-right-icon"></use>
+									</svg>
+								</button>
+
+								<button class="next flex rounded-circle w-[50px] h-[50px] bg-white text-grey-dark">
+									<span class="sr-only">next property image</span>
+									<svg class="w-4 h-4 m-auto" aria-hidden="true">
+										<use xlink:href="/assets/svg/spritesheet.svg#chevron-right-icon"></use>
+									</svg>
+								</button>
+							</div>
+							
+							<div class="flex items-center gap-4 lg:gap-6">
+								<button
+									data-modal="property-carousel-modal"
+									class="flex items-center gap-2 bg-white text-grey-dark rounded-md py-2 px-5 lg:text-md lg:py-4 lg:px-10"
+								>
+									<svg class="w-4 h-4 shrink-0 lg:w-6 lg:h-6" aria-hidden="true">
+										<use xlink:href="/assets/svg/spritesheet.svg#camera-icon"></use>
+									</svg>
+									<span>17</span>
+									<span class="sr-only">view all 17 property images</span>
+								</button>
+
+									<a
+										href="#tour-container"
+										class="bg-white text-grey-dark rounded-md py-2 px-5 whitespace-nowrap lg:text-md lg:py-4 lg:px-9"
+									>
+										3D Tour
+									</a>
+							</div>
+						</div>
+						<div class="swiper-wrapper">
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_01.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_14.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_15.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_06.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_07.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_12.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_13.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_11.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_17.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_02.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_03.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_04.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_05.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_16.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_08.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_09.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+								<div class="swiper-slide bg-black">
+									<img
+										src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_10.jpg"
+										alt=""
+										class="w-full h-full object-contain"
+									/>
+								</div>
+						</div>
+					</div>
+					<div class="hidden lg:block" aria-hidden="true"> 
+						<div class="property-carousel-thumbs swiper aspect-[365/755]">
+							<div class="swiper-wrapper !max-w-[365px]">
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_01.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_14.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_15.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_06.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_07.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_12.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_13.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_11.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_17.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_02.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_03.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_04.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_05.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_16.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_08.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_09.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+									<div class="swiper-slide bg-black !aspect-property-image cursor-pointer">
+										<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_10.jpg"
+											 alt=""
+											 class="w-full h-full object-contain" />
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<dialog
+					id="property-carousel-modal"
+					class="w-full h-full max-w-full max-h-full m-0"
+				>
+					<div class="flex flex-col h-full bg-white">
+						<div class="bg-grey-lightest py-3 px-20">
+							<button class="modal-close flex items-center gap-3 text-md text-grey-dark">
+								<svg class="w-4 h-4 shrink-0 -scale-x-100" aria-hidden="true">
+									<use xlink:href="/assets/svg/spritesheet.svg#chevron-right-icon"></use>
+								</svg>
+								<span>Back</span>
+							</button>					
+						</div>
+						<div class="full-page-carousel h-[calc(100%-51px)] overflow-hidden">
+							<div class="full-page-carousel-main swiper h-[calc(100%-230px)]">
+								<div class="swiper-wrapper">
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_01.jpg"
+													 alt="Front Aspect"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_14.jpg"
+													 alt="Lounge"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_15.jpg"
+													 alt="Lounge Alt"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_06.jpg"
+													 alt="Dining Room"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_07.jpg"
+													 alt="Dining Room Alt"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_12.jpg"
+													 alt="Kitchen"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_13.jpg"
+													 alt="Kitchen Alt"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_11.jpg"
+													 alt="Hallway"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_17.jpg"
+													 alt="Staircase"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_02.jpg"
+													 alt="Bedroom 1"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_03.jpg"
+													 alt="Bedroom 1 Alt"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_04.jpg"
+													 alt="Bedroom 2"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_05.jpg"
+													 alt="Bedroom 2 Alt"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_16.jpg"
+													 alt="Shower Room"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_08.jpg"
+													 alt="Front Door"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_09.jpg"
+													 alt="Rear Garden"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+										<div class="swiper-slide cursor-grab active:cursor-grabbing">
+											<div class="swiper-zoom-container">
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_10.jpg"
+													 alt="Rear Garden Alt"
+													 class="w-full h-full object-contain" />
+											</div>
+										</div>
+								</div>
+							</div>
+							<div class="full-page-carousel-thumbs swiper h-[230px] !py-8 !px-20 bg-white">
+								<button class="prev flex bg-white text-grey-dark absolute top-0 bottom-0 left-0 w-20 z-10">
+									<span class="sr-only">previous property image</span>
+									<svg class="w-4 h-4 -scale-x-100 m-auto" aria-hidden="true">
+										<use xlink:href="/assets/svg/spritesheet.svg#chevron-right-icon"></use>
+									</svg>
+								</button>
+
+								<button class="next flex bg-white text-grey-dark absolute top-0 bottom-0 right-0 w-20 z-10">
+									<span class="sr-only">next property image</span>
+									<svg class="w-4 h-4 m-auto" aria-hidden="true">
+										<use xlink:href="/assets/svg/spritesheet.svg#chevron-right-icon"></use>
+									</svg>
+								</button>
+
+								<div class="swiper-wrapper">
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_01.jpg"
+												alt="Front Aspect"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_14.jpg"
+												alt="Lounge"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_15.jpg"
+												alt="Lounge Alt"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_06.jpg"
+												alt="Dining Room"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_07.jpg"
+												alt="Dining Room Alt"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_12.jpg"
+												alt="Kitchen"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_13.jpg"
+												alt="Kitchen Alt"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_11.jpg"
+												alt="Hallway"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_17.jpg"
+												alt="Staircase"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_02.jpg"
+												alt="Bedroom 1"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_03.jpg"
+												alt="Bedroom 1 Alt"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_04.jpg"
+												alt="Bedroom 2"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_05.jpg"
+												alt="Bedroom 2 Alt"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_16.jpg"
+												alt="Shower Room"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_08.jpg"
+												alt="Front Door"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_09.jpg"
+												alt="Rear Garden"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+										<div class="swiper-slide cursor-pointer">
+											<img
+												src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_10.jpg"
+												alt="Rear Garden Alt"
+												class="w-full h-full object-cover"
+											/>
+										</div>
+								</div>
+							</div>							
+						</div>
+					</div>
+				</dialog>
+			<div class="grid gap-10 py-8 text-white lg:grid lg:grid-cols-2 lg:gap-[14%] lg:py-14 lg:order-first">
+				<div class="lg:mt-6">
+					<p>
+						<span class="block opacity-80">Offers Over</span>
+						<span class="block font-ofelia text-2xl leading-snug lg:text-6xl">
+							&#xA3;220,000
+						</span>
+					</p>
+
+					<h1 class="font-ofelia text-xl leading-snug mt-10 lg:text-5xl lg:mt-14">
+						95 &#xD;&#xA;Gilmerton Dykes Road, &#xD;&#xA;Edinburgh, &#xD;&#xA;EH17 8PD
+					</h1>
+
+					<ul class="flex items-center mt-6">
+						<li class="flex items-center gap-2 h-6 pr-3">
+							<svg class="w-5 h-5 shrink-0" aria-hidden="true">
+								<use xlink:href="/assets/svg/spritesheet.svg#bed-icon"></use>
+							</svg>
+							<span>2</span>
+							<span class="sr-only">Bedrooms</span>
+						</li>
+
+						<li class="flex items-center gap-2 h-6 border-x border-x-grey-light px-3">
+							<svg class="w-5 h-5 shrink-0" aria-hidden="true">
+								<use xlink:href="/assets/svg/spritesheet.svg#sofa-icon"></use>
+							</svg>
+							<span>1</span>
+							<span class="sr-only">Living Rooms</span>
+						</li>
+
+						<li class="flex items-center gap-2 h-6 pl-3">
+							<svg class="w-5 h-5 shrink-0" aria-hidden="true">
+								<use xlink:href="/assets/svg/spritesheet.svg#bath-icon"></use>
+							</svg>
+							<span>1</span>
+							<span class="sr-only">Bathrooms</span>
+						</li>
+					</ul>
+				</div>
+
+				<div class="flex flex-col gap-11 lg:gap-12">
+					<ul>
+							<li class="flex justify-between items-center gap-4 py-3 border-b border-b-white">
+								<span>
+									<span>
+										Status<span class="sr-only">:</span>
+									</span>
+								</span>
+								<span class="capitalize text-yellow">
+									For Sale
+								</span>
+							</li>
+							<li class="flex justify-between items-center gap-4 py-3 border-b border-b-white">
+								<span>
+									<span>
+										Type<span class="sr-only">:</span>
+									</span>
+								</span>
+								<span class="capitalize">
+									house
+								</span>
+							</li>
+							<li class="flex justify-between items-center gap-4 py-3 border-b border-b-white">
+								<span>
+									<span>
+										Dimensions<span class="sr-only">:</span>
+									</span>
+								</span>
+								<span>
+									85.0 m&#xB2;
+								</span>
+							</li>
+							<li class="flex justify-between items-center gap-4 py-3 border-b border-b-white">
+								<span class="flex items-center gap-3">
+									<span>
+										EPC Rating<span class="sr-only">:</span>
+									</span>
+										<button data-modal="epc-rating-modal"
+												class="">
+											<span class="sr-only">View Energy Performance Certificate (EPC)</span>
+											<svg class="w-6 h-6 shrink-0" aria-hidden="true">
+												<use xlink:href="/assets/svg/spritesheet.svg#info-circle-icon"></use>
+											</svg>
+										</button>
+										<dialog id="epc-rating-modal"
+												class="bg-transparent pt-[70px] px-1 pb-1 backdrop:backdrop-blur-[1px] backdrop:bg-grey-dark/60">
+											<div class="relative bg-white p-2 pb-3 rounded-lg">
+												<button class="absolute -top-16 right-1 modal-close flex bg-white rounded-circle w-[50px] h-[50px]">
+													<svg class="w-4 h-4 shrink-0 m-auto" aria-hidden="true">
+														<use xlink:href="/assets/svg/spritesheet.svg#close-icon"></use>
+													</svg>
+													<span class="sr-only">close</span>
+												</button>
+												<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_20.png"
+													 alt="Current Energy Efficiency Rating Value - 69/100 (C)" />
+											</div>
+										</dialog>
+								</span>
+								<span>
+									C
+								</span>
+							</li>
+							<li class="flex justify-between items-center gap-4 py-3 border-b border-b-white">
+								<span>
+									<span>
+										Council Tax<span class="sr-only">:</span>
+									</span>
+								</span>
+								<span>
+									C
+								</span>
+							</li>
+					</ul>
+
+					<div class="flex items-center justify-between gap-4 lg:mt-auto">
+						<div class="flex items-center gap-4">
+								<a class="bg-white text-grey-dark rounded-md py-2 px-5 lg:text-md lg:py-4 lg:px-9"
+									href="/forms/request-a-viewing/?propertyAddress=95 Gilmerton Dykes Road, Edinburgh, EH17 8PD&officeId=EDI">
+									Request a Viewing
+								</a>
+						</div>
+						<div aria-live="polite" class="relative">
+							<button id="property-share-button"
+									class="peer block text-white"
+									aria-describedby="property-share-tooltip">
+								<svg class="w-6 h-6" aria-hidden="true">
+									<use xlink:href="/assets/svg/spritesheet.svg#share-icon"></use>
+								</svg>
+								<span class="sr-only">Share property</span>
+							</button>
+							<div id="property-share-tooltip"
+									role="tooltip"
+									class="absolute right-12 top-1/2 -translate-y-1/2 whitespace-nowrap bg-white text-blue-dark py-2 px-5 rounded-md invisible opacity-0 [transition:opacity_200ms,visibility_200ms] peer-hover:!visible peer-hover:!opacity-100 peer-focus-visible:!visible peer-focus-visible:!opacity-100 before:absolute before:-right-1.5 before:top-[15px] before:-rotate-45 before:w-3 before:h-3 before:bg-white">
+								Copy Link
+							</div>
+						</div>							
+					</div>
+				</div>				
+			</div>
+		</div>		
+	</section>
+
+		<section class="accordion" aria-label="property features">
+			<div class="bg-grey-lightest">
+				<div class="container pt-10 pb-6 lg:pb-8">
+					<ul class="grid grid-cols-2 lg:gap-x-4 gap-y-8 md:grid-cols-3 lg:gap-10 lg:justify-center lg:grid-cols-[repeat(auto-fit,minmax(0,1fr))]">
+								<li class="flex items-center gap-3 text-grey lg:flex-col">
+									<svg class="w-6 h-6 shrink-0 pointer-events-none lg:w-12 lg:h-12" aria-hidden="true">
+										<use xlink:href="/assets/svg/spritesheet.svg#feature-semi-detached"></use>
+									</svg>
+									<span class="capitalize leading-tight lg:text-center">
+										Semi Detached
+									</span>
+								</li>
+								<li class="flex items-center gap-3 text-grey lg:flex-col">
+									<svg class="w-6 h-6 shrink-0 pointer-events-none lg:w-12 lg:h-12" aria-hidden="true">
+										<use xlink:href="/assets/svg/spritesheet.svg#feature-garden"></use>
+									</svg>
+									<span class="capitalize leading-tight lg:text-center">
+										Garden
+									</span>
+								</li>
+								<li class="flex items-center gap-3 text-grey lg:flex-col">
+									<svg class="w-6 h-6 shrink-0 pointer-events-none lg:w-12 lg:h-12" aria-hidden="true">
+										<use xlink:href="/assets/svg/spritesheet.svg#feature-off-street"></use>
+									</svg>
+									<span class="capitalize leading-tight lg:text-center">
+										Off Street
+									</span>
+								</li>
+								<li class="flex items-center gap-3 text-grey lg:flex-col">
+									<svg class="w-6 h-6 shrink-0 pointer-events-none lg:w-12 lg:h-12" aria-hidden="true">
+										<use xlink:href="/assets/svg/spritesheet.svg#feature-garage"></use>
+									</svg>
+									<span class="capitalize leading-tight lg:text-center">
+										Garage
+									</span>
+								</li>
+					</ul>
+
+				</div>
+			</div>
+
+			
+		</section>
+	<section aria-label="property introduction">
+		<div class="container grid gap-14 py-14 lg:py-[72px] lg:grid-cols-2 lg:gap-[14%]">
+			<div class="flex flex-col gap-y-[72px] lg:gap-y-20">
+				<div class="accordion accordion--no-scroll space-y-6">
+						<p class="text-lg text-grey-dark">
+							Located on the fringes of the popular Gilmerton Dykes area of Edinburgh is this well-presented semi-detached house which provides bright and spacious accommodation with large south facing garden.
+						</p>
+						<div
+							id="property-description-panel"
+							class="group invisible opacity-0 grid grid-rows-[0fr] overflow-hidden !mt-0"
+							aria-labelledby="property-description-toggle"
+						>
+							<div class="grid row-[1_/_span_2] overflow-hidden space-y-6">
+										<p class="text-md text-grey first:mt-6">
+											With gas central heating and double glazed windows, the house also benefits from solar panels.
+										</p>
+										<p class="text-md text-grey first:mt-6">
+											The accommodation includes an entrance hallway with understairs cupboard and to the front is a good sized lounge with feature fireplace.  The dining kitchen is fitted with a range of base and wall units with there are two windows and door leading to the garden.  Upstairs there are two storage cupboards on the landing and there are two large bedrooms with fitted wardrobes.  The shower room has a double shower and window to rear.
+										</p>
+										<p class="text-md text-grey first:mt-6">
+											Externally there are front and rear gardens and to the side is a driveway providing off street parking leading to the garage.  The large south facing rear garden is mainly laid to lawn and enjoys a great degree of privacy.  
+										</p>
+										<p class="text-md text-grey first:mt-6">
+											Early viewing of this lovely family home is essential.
+										</p>
+										<p class="text-md text-grey first:mt-6">
+											Set to the south east of the city centre, the popular residential area of Gilmerton has an excellent range of amenities including a fine range of shops, a choice of supermarkets, regular bus services and both primary and secondary schools nearby.  The Royal Infirmary is located nearby and the area has excellent transport links to the city centre, Straiton retail park and the City Bypass.
+										</p>
+									<table border="0" cellpadding="0" cellspacing="0" class="text-grey">
+										<caption class="text-lg text-left pb-4">
+											Rooms <span class="sr-only">dimensions</span>
+										</caption>
+										<tbody>											
+												<tr class="border-b border-b-grey-borders">
+													<th class="font-normal text-left py-2 pr-2">
+														Lounge
+													</th>
+													<td class="font-normal text-right py-2 pl-2">
+														<span class="whitespace-nowrap">4.2m x 3.96m</span>
+														<span class="whitespace-nowrap">(13&#x27;9&quot; x 13&#x27;0&quot;)*</span>
+													</td>
+												</tr>
+												<tr class="border-b border-b-grey-borders">
+													<th class="font-normal text-left py-2 pr-2">
+														Dining Kitchen
+													</th>
+													<td class="font-normal text-right py-2 pl-2">
+														<span class="whitespace-nowrap">6.5m x 2.84m</span>
+														<span class="whitespace-nowrap">(21&#x27;4&quot; x 9&#x27;4&quot;)*</span>
+													</td>
+												</tr>
+												<tr class="border-b border-b-grey-borders">
+													<th class="font-normal text-left py-2 pr-2">
+														Bedroom 1
+													</th>
+													<td class="font-normal text-right py-2 pl-2">
+														<span class="whitespace-nowrap">4.34m x 3.4m</span>
+														<span class="whitespace-nowrap">(14&#x27;3&quot; x 11&#x27;2&quot;)*</span>
+													</td>
+												</tr>
+												<tr class="border-b border-b-grey-borders">
+													<th class="font-normal text-left py-2 pr-2">
+														Bedroom 2
+													</th>
+													<td class="font-normal text-right py-2 pl-2">
+														<span class="whitespace-nowrap">3.94m x 2.72m</span>
+														<span class="whitespace-nowrap">(12&#x27;11&quot; x 8&#x27;11&quot;)*</span>
+													</td>
+												</tr>
+												<tr class="border-b border-b-grey-borders">
+													<th class="font-normal text-left py-2 pr-2">
+														Shower Room
+													</th>
+													<td class="font-normal text-right py-2 pl-2">
+														<span class="whitespace-nowrap">1.85m x 1.68m</span>
+														<span class="whitespace-nowrap">(6&#x27;1&quot; x 5&#x27;6&quot;)*</span>
+													</td>
+												</tr>
+												<tr class="border-b border-b-grey-borders">
+													<th class="font-normal text-left py-2 pr-2">
+														Garage
+													</th>
+													<td class="font-normal text-right py-2 pl-2">
+														<span class="whitespace-nowrap">6.07m x 2.7m</span>
+														<span class="whitespace-nowrap">(19&#x27;11&quot; x 8&#x27;10&quot;)*</span>
+													</td>
+												</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<td colspan="2" class="pt-4">
+													<em class="font-bold not-italic">
+														* All measurements are approximate.
+													</em>
+												</td>
+											</tr>
+										</tfoot>
+									</table>									
+							</div>
+						</div>
+						<button
+							id="property-description-toggle"
+							class="group text-md text-left text-grey-dark whitespace-nowrap underline underline-offset-8"
+							aria-expanded="false"
+							aria-controls="property-description-panel"
+						>
+							<span class="block group-aria-expanded:hidden">
+								Read full description
+							</span>
+							<span class="hidden group-aria-expanded:block">
+								Read less
+							</span>
+						</button>
+				</div>
+					<div class="space-y-6 mt-auto">
+							<button
+								data-modal="floor-plans-carousel-modal"
+								class="w-full text-md text-grey-dark leading-snug rounded-md bg-white border border-grey-dark p-4"
+							>
+								View Floor Plans
+							</button>
+							<dialog
+								id="floor-plans-carousel-modal"
+								class="w-full h-full max-w-full max-h-full !m-0"
+							>
+								<div class="flex flex-col h-full bg-white">
+									<div class="bg-grey-lightest py-3 px-20">
+										<button class="modal-close flex items-center gap-3 text-md text-grey-dark">
+											<svg class="w-4 h-4 shrink-0 -scale-x-100" aria-hidden="true">
+												<use xlink:href="/assets/svg/spritesheet.svg#chevron-right-icon"></use>
+											</svg>
+											<span>Back</span>
+										</button>
+									</div>
+									<div class="full-page-carousel h-[calc(100%-51px)] overflow-hidden">
+										<div class="full-page-carousel-main swiper h-[calc(100%-230px)]">
+											<div class="swiper-wrapper">
+													<div class="swiper-slide cursor-pointer">
+														<div class="swiper-zoom-container">
+															<img src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_19.jpg"
+																 alt="Floorplan"
+																 class="w-full h-full object-contain" />
+														</div>
+													</div>
+											</div>
+										</div>
+
+										<div class="full-page-carousel-thumbs swiper h-[230px] !py-8 !px-20 bg-white">
+											<button class="prev flex bg-white text-grey-dark absolute top-0 bottom-0 left-0 w-20 z-10">
+												<span class="sr-only">previous floor plan</span>
+												<svg class="w-4 h-4 -scale-x-100 m-auto" aria-hidden="true">
+													<use xlink:href="/assets/svg/spritesheet.svg#chevron-right-icon"></use>
+												</svg>
+											</button>
+
+											<button class="next flex bg-white text-grey-dark absolute top-0 bottom-0 right-0 w-20 z-10">
+												<span class="sr-only">next floor plan</span>
+												<svg class="w-4 h-4 m-auto" aria-hidden="true">
+													<use xlink:href="/assets/svg/spritesheet.svg#chevron-right-icon"></use>
+												</svg>
+											</button>
+
+											<div class="swiper-wrapper">
+													<div class="swiper-slide cursor-pointer">
+														<img
+															src="https://assets.reapit.net/aac/live/pictures/EDI/26/EDI260546_19.jpg"
+															alt="Floorplan"
+															class="w-full h-full object-contain"
+														/>
+													</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</dialog>
+
+							<a
+								href="Https://url.Uk.M.Mimecastprotect.Com/S/Aabuczpqatmrgyqs4f7js92qkw?domain=gs-Surveyors.Co.Uk"
+								target="_blank"
+								class="w-full text-md text-center block text-white leading-snug rounded-md bg-purple border border-purple p-4"
+							>
+								View Home Report
+							</a>
+					</div>
+			</div>
+
+<div class="bg-blue text-white py-14 px-8 rounded-xl lg:sticky lg:top-[152px] lg:self-start lg:py-20 lg:px-12">
+    <div class="space-y-4">
+            <h2 class="font-ofelia text-4xl">
+                Mortgage Calculator
+            </h2>
+            <p class="text-base">Find out approximate monthly payments using our mortgage calculator</p>
+    </div>
+
+    <p 
+        id="mortgage-calc-preview"
+        class="font-ofelia text-2xl tracking-wide my-[72px] lg:text-5xl"
+    >
+        &#xA3;1,443.00 p/m
+    </p>
+
+        <a href="#mortgage-calc" class="text-md underline underline-offset-8">Personalise your results</a>
+</div>
+  		</div>
+
+	</section>
+
+		<section class="relative py-16 md:py-24 lg:py-32 overflow-hidden"
+				 aria-label="property 3D tour"
+				 id="tour-container"
+		>
+			<iframe src="https://my.matterport.com/show/?m=Jq524SuKRrj"
+					class="w-full aspect-video max-h-[700px]"
+					title="Interactive 3D walkthrough of 95 Gilmerton Dykes Road, Edinburgh, EH17 8PD"
+					frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					referrerpolicy="strict-origin-when-cross-origin"
+					allowfullscreen></iframe>
+
+			<div class="clip-lozenge aspect-lozenge absolute top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 bg-turquoise-light w-[80%] lg:w-[70%] left-[26.3%] rotate-[20deg] max-w-[1047px]"></div>
+			<div class="clip-lozenge aspect-lozenge absolute top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 bg-turquoise w-[88%] lg:w-[77%] left-[59%] rotate-[10deg] max-w-[1152px]"></div>
+		</section>
+	
+<section class="h-[700px]" aria-label="property google map">
+    <div id="map" class="h-full"></div>
+</section>
+
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTkpo_2aPk_Ts-GUCJheEFKqnmlsSFH84&amp;loading=async&amp;callback=initMap&amp;v=weekly">
+</script>
+
+<script>
+    // Initialise property map
+    async function initMap() {
+        const { Map } = await google.maps.importLibrary("maps");
+        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+        const position = {
+            lat: 55.899616,
+            lng: -3.141209,
+        };
+
+        const map = new Map(document.getElementById("map"), {
+            zoom: 16,
+            center: position,
+            mapId: "property-map",
+        });
+
+        const content = document.createElement("img");
+        content.src = `${window.location.origin}/../../media/fwwaqdyc/marker.svg`;
+        content.alt = "";
+
+        const marker = new AdvancedMarkerElement({
+            map,
+            position,
+            content,
+            title: "95 Gilmerton Dykes Road, Edinburgh, EH17 8PD",
+        });
+    }
+</script>
+
+
+<section id="mortgage-calc" class="scroll-mt-10 lg:scroll-mt-28">
+    <div class="container grid gap-12 py-16 lg:grid-cols-2 lg:gap-x-[14%] lg:pt-28">
+
+        <div class="flex flex-col gap-10">
+
+            <div class="flex flex-col gap-5">
+
+                    <h2 class="font-ofelia text-grey-dark text-2xl tracking-wide leading-snug lg:text-6xl">
+                        Mortgage Calculator
+                    </h2>
+                    <p class="text-grey">
+                        Find out approximate monthly payments using our mortgage calculator&#xA;
+                    </p>
+
+            </div>
+
+            <div class="flex flex-col gap-10">
+
+                <div>
+                    <label
+                        for="purchase-price"
+                        class="block font-semibold text-grey"
+                    >
+                        Purchase Price (£)
+                    </label>
+                    <input
+                        id="purchase-price"
+                        type="number"
+                        value="220000.00"
+                        class="appearance-none block w-full bg-transparent border-0 text-grey h-12 border-b border-b-slate"
+                    />
+                </div>
+
+                <div class="flex flex-col gap-3.5">
+                    <label
+                        for="deposit"
+                        class="flex justify-between items-center font-semibold text-grey"
+                    >
+                        <span>
+                            Deposit
+                            <span id="deposit-percent">
+                                (10%)
+                            </span>
+                        </span>
+                        <span id="deposit-value">
+                            £22000
+                        </span>
+                    </label>
+                    <input
+                        id="deposit"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="10"
+                        class="appearance-none block w-full h-1 bg-grey-light rounded-sm cursor-pointer accent-blue"
+                    />
+                </div>
+
+                <div class="flex flex-col gap-3.5">
+                    <label
+                        for="term"
+                        class="flex justify-between items-center font-semibold text-grey"
+                    >
+                        <span>
+                            Term
+                        </span>
+                        <span id="term-value">
+                            17 Years
+                        </span>
+                    </label>
+                    <input
+                        id="term"
+                        type="range"
+                        min="1"
+                        max="35"
+                        value="17"
+                        class="appearance-none block w-full h-1 bg-grey-light rounded-sm cursor-pointer accent-blue"
+                    />
+                </div>
+
+                <div class="flex flex-col gap-3.5">
+                    <label
+                        for="interest"
+                        class="flex justify-between items-center font-semibold text-grey"
+                    >
+                        <span>
+                            Interest
+                        </span>
+                        <span id="interest-value">
+                            5%
+                        </span>
+                    </label>
+                    <input
+                        id="interest"
+                        type="range"
+                        min="0.5"
+                        max="10.0"
+                        step="0.1"
+                        value="5"
+                        class="appearance-none block w-full h-1 bg-grey-light rounded-sm cursor-pointer accent-blue"
+                    />
+                </div>
+
+            </div>
+        </div>
+
+        <div class="bg-blue text-white rounded-xl px-6 py-14 lg:px-12">
+
+                <h2 class="font-ofelia text-xl tracking-wide lg:text-5xl">
+                    Your estimated monthly repayments:
+                </h2>
+            <p
+                id="mortgage-calc-result"
+                class="font-ofelia text-2xl tracking-wide my-12 lg:my-[72px] lg:text-5xl"
+                aria-live="polite"
+            >
+                &#xA3;1,443.00 p/m
+            </p>
+
+
+        </div>
+
+            <div class="col-span-full">
+                <p class="text-sm text-grey">
+                    This information is a guide only and should not be relied on as a recommendation or advice that any particular mortgage is suitable for you. All mortgages are subject to the applicant(s) meeting the eligibility criteria of lenders. Make an appointment to receive mortgage advice suitable for your needs and circumstances. We reserve the right to charge a mortgage fee in some cases. Your home may be repossessed if you do not keep up repayments on your mortgage.
+                </p>
+            </div>
+
+    </div>
+</section>	
+
+<section>
+</section>
+
+</div>
+        <svg height="0" width="0" aria-hidden="true">
+            <defs>
+                <clipPath id="lozenge" clipPathUnits="objectBoundingBox">
+                    <path d="m0.984,0.729 l-0.187,0.25 c-0.01,0.013,-0.024,0.021,-0.038,0.021 H0.241 c-0.014,0,-0.028,-0.008,-0.038,-0.021 L0.016,0.729 c-0.01,-0.014,-0.016,-0.032,-0.016,-0.051 V0.323 c0,-0.019,0.006,-0.038,0.016,-0.051 L0.203,0.021 c0.01,-0.014,0.024,-0.021,0.038,-0.021 h0.518 c0.014,0,0.028,0.008,0.038,0.021 l0.187,0.251 c0.01,0.014,0.016,0.032,0.016,0.051 v0.354 c0,0.019,-0.006,0.038,-0.016,0.051" />
+                </clipPath>
+            </defs>
+        </svg>
+    </main>
+    
+
+    <footer class="bg-grey-dark text-white">
+        <div>
+            <div class="container py-10 lg:flex lg:flex-col lg:gap-12 lg:py-16">
+                <div class="flex flex-col gap-10 lg:flex-row lg:justify-between">
+                    <div>
+                                <a href="/" class="flex">
+            <img
+                src="/../../media/wubg4ax5/ac-master-logo-horizontal_negative_-rgb.svg"
+                alt="Aberdein Considine Logo"
+                class="block object-contain object-left w-[200px] h-[76px] lg:w-[232px] lg:h-[88px]"
+            />
+        </a>
+
+
+                        <div class="rich-text rich-text--dark text-md mt-8 max-w-[550px]">
+                            <p>As members of the Law Society of Scotland, we are committed to providing our clients with high-quality legal services and uphold the highest ethical standards.<br><br>Aberdein Considine LLP is authorised and regulated by the Financial Conduct Authority under reference number FRN 1012485.</p>
+<!-- Start of SRA Digital Badge code -->
+<p>&nbsp;</p>
+<div style="max-width: 275px; max-height: 163px;">
+<div style="position: relative; padding-bottom: 59.1%; height: auto; overflow: hidden;"><iframe frameborder="0" scrolling="no" allowtransparency="true" src="https://cdn.yoshki.com/iframe/55845r.html" style="border: 0px; margin: 0px; padding: 0px; backgroundcolor: transparent; top: 0px; left: 0px; width: 100%; height: 100%; position: absolute;"></iframe></div>
+</div>
+<!-- End of SRA Digital Badge code -->
+<p>&nbsp;</p>
+<!-- TrustBox widget - Mini -->
+<div class="trustpilot-widget" style="float: left;" data-locale="en-US" data-template-id="53aa8807dec7e10d38f59f32" data-businessunit-id="5b69ad0d8e5136000142fd8c" data-style-height="150px" data-style-width="100%" data-theme="dark" data-token="811dc60e-601b-46d5-b003-d90f2c48f2d5"><a rel="noopener" href="https://www.trustpilot.com/review/www.acandco.com" target="_blank">Trustpilot</a></div>
+<!-- End TrustBox widget -->
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2 class="text-md tracking-wide font-semibold">Main Office</h2>
+                        <p class="mt-4 max-w-52">1st Floor, Blenheim House, Fountainhall Road, Aberdeen, Scotland, AB15 4DT</p>
+                        <p class="mt-4">
+                            <a href="tel:0333 0044333">
+                                0333 0044333
+                            </a>
+                        </p>
+                        <p>
+                            <a href="mailto:ask@acandco.com">
+                                ask@acandco.com
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="">
+                            <h2 class="text-md tracking-wide font-semibold">Follow us</h2>
+                            <ul class="flex flex-wrap gap-2 mt-4">
+                                    <li>
+                                        <a href="https://www.instagram.com/aberdeinconsidine"
+                                           class="block w-[50px] h-[50px] p-3.5 border rounded-circle">
+                                            <img src="/../../media/wmqflh5f/instagram-sjk.svg"
+                                                 alt="Instagram"
+                                                 class="block w-full h-full object-contain" />
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.facebook.com/aberdeinconsidine"
+                                           class="block w-[50px] h-[50px] p-3.5 border rounded-circle">
+                                            <img src="/../../media/ukud4u1u/facebook-sjk.svg"
+                                                 alt="Facebook"
+                                                 class="block w-full h-full object-contain" />
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.linkedin.com/company/aberdein-considine"
+                                           target="_blank"
+                                           class="block w-[50px] h-[50px] p-3.5 border rounded-circle">
+                                            <img src="/../../media/yoqb2ywi/linkedin-sjk.svg"
+                                                 alt="LinkedIn"
+                                                 class="block w-full h-full object-contain" />
+                                        </a>
+                                    </li>
+                            </ul>
+                    </div>
+                </div>
+                <div class="flex flex-col pt-10 gap-10 lg:pt-16 lg:flex-row lg:justify-between lg:items-end">
+                        <ul class="w-[450px] max-w-full">
+                                <li class="">
+                                    <a href="https://payment.acandco.com"
+                                       target="_blank"
+                                       class="flex justify-between items-center gap-6 py-3 border-b border-b-grey-light">
+                                        Payment Portal
+                                        <svg class="w-3 h-3 text-white -rotate-[90deg]"
+                                             aria-hidden="true">
+                                            <use xlink:href="/assets/svg/spritesheet.svg#arrow-down-icon"></use>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="https://acandco.com/complaints-procedures/"
+                                       class="flex justify-between items-center gap-6 py-3 border-b border-b-grey-light">
+                                        Complaints Procedures
+                                        <svg class="w-3 h-3 text-white -rotate-[90deg]"
+                                             aria-hidden="true">
+                                            <use xlink:href="/assets/svg/spritesheet.svg#arrow-down-icon"></use>
+                                        </svg>
+                                    </a>
+                                </li>
+                        </ul>
+                    <ul class="flex flex-col gap-6 lg:flex-row lg:gap-12">
+                            <li>
+                                <a href="https://legal.acandco.com"
+                                   class="flex gap-3 items-center text-md">
+                                    <svg class="w-4 h-4 shrink-0"
+                                         aria-hidden="true">
+                                        <use xlink:href="/assets/svg/spritesheet.svg#external-link-icon"></use>
+                                    </svg>
+                                    Legal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.acandco.com"
+                                   class="flex gap-3 items-center text-md">
+                                    <svg class="w-4 h-4 shrink-0"
+                                         aria-hidden="true">
+                                        <use xlink:href="/assets/svg/spritesheet.svg#external-link-icon"></use>
+                                    </svg>
+                                    Firm
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-t-grey-light">
+            <div class="container flex flex-col gap-10 py-6 lg:flex-row lg:justify-between">
+                    <ul class="flex flex-col gap-6 lg:flex-row lg:gap-14">
+                            <li>
+                                <a href="https://acandco.com/terms-of-business/" class="text-base">
+                                    Terms of Business
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://acandco.com/policies/" class="text-base">
+                                    Policies
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://acandco.com/corporate-social-responsibility/" class="text-base">
+                                    Corporate Social Responsibility
+                                </a>
+                            </li>
+                    </ul>
+                <p>Aberdein Considine &copy; 2026</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+        <!--Body Scripts -->
+</body>
+</html>

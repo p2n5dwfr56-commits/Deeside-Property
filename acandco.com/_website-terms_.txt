@@ -1,0 +1,718 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+
+
+
+
+
+
+    <meta property="og:url" content="https://property.acandco.com/404/" />
+
+
+            <META NAME="robots" CONTENT="noindex,nofollow">
+
+
+        <!--Head Scripts -->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-55PGVNZ');</script>
+<!-- End Google Tag Manager -->
+
+
+<!-- Wealth to Legal new code -->
+<script>
+(function () {
+  // --- Helpers ---
+  function qs(name) {
+    return new URLSearchParams(window.location.search).get(name) || "";
+  }
+
+  function hasAnyParamMatch() {
+    const from = qs("from").toLowerCase();
+    const utmSource = qs("utm_source").toLowerCase();
+    const utmMedium = qs("utm_medium").toLowerCase();
+    const utmCampaign = qs("utm_campaign").toLowerCase();
+
+    // Adjust these rules to match what you actually see in analytics
+    return (
+      from === "acwealth" ||
+      utmSource === "acwealth" ||
+      utmCampaign.includes("acwealth") ||
+      utmMedium.includes("acwealth")
+    );
+  }
+
+  const ref = document.referrer || "";
+  const cameFromWealthViaReferrer = ref.includes("acwealth.co.uk");
+
+  const shouldShow =
+    cameFromWealthViaReferrer || hasAnyParamMatch();
+
+  if (!shouldShow) return;
+
+  // Use localStorage so it persists across tabs/sessions
+  if (localStorage.getItem("wealthPopupAccepted") === "true") return;
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const style = document.createElement("style");
+    style.textContent = `
+      #popupOverlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999999;
+        padding: 1em;
+        box-sizing: border-box;
+      }
+      .popupBox {
+        background: #fff;
+        padding: 1.5em;
+        border-radius: 10px;
+        max-width: 420px;
+        width: 100%;
+        font-family: sans-serif;
+        text-align: center;
+      }
+      .popupBox p { margin-bottom: 1em; font-size: 1rem; }
+      .popupBox button {
+        margin: .5em;
+        padding: .6em 1.4em;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .popupAccept { background:#4CAF50;color:#fff; }
+      .popupLeave  { background:#f44336;color:#fff; }
+    `;
+    document.head.appendChild(style);
+
+    const popup = document.createElement("div");
+    popup.id = "popupOverlay";
+    popup.innerHTML = `
+      <div class="popupBox">
+        <p>You are now entering the website of Aberdein Considine LLP. FCA Registration No: 1012485, SRA Registration No: 8011453.</p>
+        <p>Please accept to continue or leave this site.</p>
+        <button class="popupAccept">Accept</button>
+        <button class="popupLeave">Leave this site</button>
+      </div>
+    `;
+    document.body.appendChild(popup);
+
+    popup.querySelector(".popupAccept").onclick = () => {
+      localStorage.setItem("wealthPopupAccepted", "true");
+      popup.remove();
+    };
+
+    popup.querySelector(".popupLeave").onclick = () => {
+      window.location.href = "https://www.google.co.uk";
+    };
+  });
+})();
+</script>
+
+
+
+
+
+<!-- Wealth → Legal Popup Trigger Old code
+<script>
+(function () {
+
+  // Helper to read a cookie by name
+  function hasCookie(name) {
+    return document.cookie.split(";").some(function (c) {
+      return c.trim().startsWith(name + "=");
+    });
+  }
+
+  const cameFromWealth = hasCookie("cameFromWealth");
+  const alreadyAccepted = localStorage.getItem("wealthPopupAccepted") === "true";
+
+  // If they didn't come from Wealth or have already accepted, do nothing
+  if (!cameFromWealth || alreadyAccepted) return;
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    // Inject styles
+    const style = document.createElement("style");
+    style.textContent = `
+      #popupOverlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999999;
+        padding: 1em;
+        box-sizing: border-box;
+      }
+      .popupBox {
+        background: #fff;
+        padding: 1.5em;
+        border-radius: 10px;
+        max-width: 420px;
+        width: 100%;
+        font-family: sans-serif;
+        text-align: center;
+      }
+      .popupBox p { margin-bottom: 1em; font-size: 1rem; }
+      .popupBox button {
+        margin: .5em;
+        padding: .6em 1.4em;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .popupAccept { background:#4CAF50;color:#fff; }
+      .popupLeave  { background:#f44336;color:#fff; }
+    `;
+    document.head.appendChild(style);
+
+    // Build popup HTML
+    const popup = document.createElement("div");
+    popup.id = "popupOverlay";
+    popup.innerHTML = `
+      <div class="popupBox">
+        <p>You are now entering the website of Aberdein Considine LLP. FCA Registration No: 1012485, SRA Registration No: 8011453.</p>
+        <p>Please accept to continue or leave this site.</p>
+        <button class="popupAccept">Accept</button>
+        <button class="popupLeave">Leave this site</button>
+      </div>
+    `;
+    document.body.appendChild(popup);
+
+    // Button actions
+    popup.querySelector(".popupAccept").onclick = () => {
+      localStorage.setItem("wealthPopupAccepted", "true");
+      // Clear the marker cookie so it doesn't trigger again in future
+      document.cookie = "cameFromWealth=; path=/; domain=.acandco.com; Max-Age=0";
+      popup.remove();
+    };
+
+    popup.querySelector(".popupLeave").onclick = () => {
+      window.location.href = "https://www.google.co.uk";
+    };
+  });
+
+})();
+</script> -->
+        <!--Cookie Policy-->
+        <!--Google Tag Manager-->
+        <script>
+
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl + '#'; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', '#');
+        </script>
+    
+
+    <!-- Open Sans Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" crossorigin href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open&#x2B;Sans&amp;display=swap">
+
+    <!-- Compiled Assets -->
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="/css/rte_stylesheet.css">
+    <script defer src="/assets/js/app.js"></script>
+    <script defer="defer" src="/App_Plugins/UmbracoForms/Assets/promise-polyfill/dist/polyfill.min.js?v=13.4.1" type="application/javascript"></script><script defer="defer" src="/App_Plugins/UmbracoForms/Assets/aspnet-client-validation/dist/aspnet-validation.min.js?v=13.4.1" type="application/javascript"></script>
+    
+    
+</head>
+<body class="font-opensans">
+    
+
+<header class="site-header sticky top-0 bg-white py-6 z-10 lg:py-8">
+    <div class="container flex items-center gap-6">
+
+                <a href="/" class="flex">
+            <img
+                src="/media/qyml23cn/ac-logo.svg"
+                alt="Aberdein Considine"
+                class="block object-contain object-left w-[120px] h-[45.52px]  lg:w-[232px] lg:h-[88px]"
+            />
+        </a>
+
+
+        <a
+            href="#main"
+            class="sr-only !absolute top-px text-grey-dark lg:top-1 focus:not-sr-only"
+        >
+            Skip to main content
+        </a>
+
+            <div class="hidden xl:block">
+                <button class="flex items-center gap-8 text-lg text-grey-dark tracking-wide px-7"
+                        id="site-selector-toggle"
+                        aria-expanded="false"
+                        aria-controls="site-selector"
+                        aria-label="site selector">
+                    Home
+                    <svg class="w-3 h-3 text-grey-dark"
+                         aria-hidden="true">
+                        <use xlink:href="/assets/svg/spritesheet.svg#arrow-down-icon"></use>
+                    </svg>
+                </button>
+                <div id="site-selector"
+                     class="absolute top-[152px] w-[200px] bg-white rounded-b overflow-hidden invisible opacity-0"
+                     aria-labelledby="site-selector-toggle">
+                    <ul>
+                            <li>
+                                <a href="https://legal.acandco.com"
+                                   class="flex items-center min-h-10 text-lg text-grey-dark tracking-wide bg-white py-1 pl-7 pr-2 transition-colors hover:bg-grey-dark hover:text-white">
+                                    Legal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.acandco.com"
+                                   class="flex items-center min-h-10 text-lg text-grey-dark tracking-wide bg-white py-1 pl-7 pr-2 transition-colors hover:bg-grey-dark hover:text-white">
+                                    Firm
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        <nav
+            aria-label="main navigation"
+            class="flex items-center gap-6 order-1 lg:relative lg:grow lg:gap-12 lg:order-none "
+        >
+
+            <button 
+                class="group flex lg:hidden"
+                id="main-nav-toggle"
+                aria-label="main menu"
+                aria-expanded="false"
+                aria-controls="main-nav"
+            >
+                <svg 
+                    class="w-11 h-5 text-grey-dark group-aria-expanded:hidden"
+                    aria-hidden="true"
+                >
+                    <use xlink:href="/assets/svg/spritesheet.svg#menu-icon"></use>
+                </svg>
+                <svg 
+                    class="hidden w-11 h-5 text-grey-dark group-aria-expanded:block"
+                    aria-hidden="true"
+                >
+                    <use xlink:href="/assets/svg/spritesheet.svg#close-icon"></use>
+                </svg>
+            </button>
+
+                <div
+                    id="main-nav"
+                    aria-labelledby="main-nav-toggle"
+                    class="absolute top-full left-0 right-0 bg-white h-[calc(100svh-93.52px)] invisible opacity-0 overflow-y-auto lg:block lg:static lg:h-auto lg:ml-auto lg:mr-6 lg:bg-transparent lg:visible lg:opacity-100 lg:transition-none lg:overflow-visible"
+                >
+                    <ul class="container flex flex-col pt-[75px] pb-10 lg:relative lg:flex-row lg:gap-8 lg:p-0 lg:m-0 lg:w-auto">
+                            <li>
+                                    <button
+                                        class="nav-btn group/nav-item"
+                                        id="sub-nav-trigger-f7646db3-c25d-4485-a5bf-e314327699c4"
+                                        aria-expanded="false"
+                                        aria-controls="sub-nav-f7646db3-c25d-4485-a5bf-e314327699c4"
+                                    >
+                                        Buying
+                                        <svg
+                                            class="w-4 h-4 text-grey-dark transition-transform duration-300 group-aria-expanded/nav-item:-rotate-180 lg:hidden"
+                                            aria-hidden="true"
+                                        >
+                                            <use xlink:href="/assets/svg/spritesheet.svg#chevron-down-icon"></use>
+                                        </svg>
+                                    </button>
+                                    <div
+                                        id="sub-nav-f7646db3-c25d-4485-a5bf-e314327699c4"
+                                        aria-labelledby="sub-nav-trigger-f7646db3-c25d-4485-a5bf-e314327699c4"
+                                        class="invisible opacity-0 grid grid-rows-[0fr] [&.visible]:grid-rows-[1fr] overflow-hidden lg:absolute lg:top-[87px] lg:left-0 lg:right-0 lg:overflow-visible lg:grid-rows-[1fr]"
+                                    >
+                                        <div class="sub-nav-bg hidden lg:block fixed top-[152px] left-0 h-10 w-full bg-white -z-10"></div>
+                                        <ul class="flex flex-col gap-4 overflow-hidden lg:gap-6 lg:py-7 lg:overflow-visible">
+                                            <li class="pt-6 lg:pt-0">
+                                                <a
+                                                    class="block text-md text-grey-dark lg:inline-block"
+                                                    href="https://property.acandco.com/buying/"
+                                                >
+                                                    Buying
+                                                </a>
+                                            </li>
+                                                <li>
+                                                    <a
+                                                        class="block text-md text-grey-dark lg:inline-block"
+                                                        href="https://property.acandco.com/mortgages/"
+                                                    >
+                                                        Mortgages
+                                                    </a>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </li>
+                            <li>
+                                    <a
+                                        href="https://property.acandco.com/selling/"
+                                        class="nav-btn"
+                                    >
+                                        Selling
+                                    </a>
+                            </li>
+                            <li>
+                                    <button
+                                        class="nav-btn group/nav-item"
+                                        id="sub-nav-trigger-e9eb607c-bfc1-482a-a192-c1d07d95e36b"
+                                        aria-expanded="false"
+                                        aria-controls="sub-nav-e9eb607c-bfc1-482a-a192-c1d07d95e36b"
+                                    >
+                                        New Builds
+                                        <svg
+                                            class="w-4 h-4 text-grey-dark transition-transform duration-300 group-aria-expanded/nav-item:-rotate-180 lg:hidden"
+                                            aria-hidden="true"
+                                        >
+                                            <use xlink:href="/assets/svg/spritesheet.svg#chevron-down-icon"></use>
+                                        </svg>
+                                    </button>
+                                    <div
+                                        id="sub-nav-e9eb607c-bfc1-482a-a192-c1d07d95e36b"
+                                        aria-labelledby="sub-nav-trigger-e9eb607c-bfc1-482a-a192-c1d07d95e36b"
+                                        class="invisible opacity-0 grid grid-rows-[0fr] [&.visible]:grid-rows-[1fr] overflow-hidden lg:absolute lg:top-[87px] lg:left-0 lg:right-0 lg:overflow-visible lg:grid-rows-[1fr]"
+                                    >
+                                        <div class="sub-nav-bg hidden lg:block fixed top-[152px] left-0 h-10 w-full bg-white -z-10"></div>
+                                        <ul class="flex flex-col gap-4 overflow-hidden lg:gap-6 lg:py-7 lg:overflow-visible">
+                                            <li class="pt-6 lg:pt-0">
+                                                <a
+                                                    class="block text-md text-grey-dark lg:inline-block"
+                                                    href="https://property.acandco.com/new-build/"
+                                                >
+                                                    New Builds
+                                                </a>
+                                            </li>
+                                                <li>
+                                                    <a
+                                                        class="block text-md text-grey-dark lg:inline-block"
+                                                        href="https://property.acandco.com/new-build/for-developers/"
+                                                    >
+                                                        For Developers
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        class="block text-md text-grey-dark lg:inline-block"
+                                                        href="https://property.acandco.com/new-build/for-buyers/"
+                                                    >
+                                                        For Buyers
+                                                    </a>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </li>
+                            <li>
+                                    <a
+                                        href="https://property.acandco.com/properties/"
+                                        class="nav-btn"
+                                    >
+                                        Property Search
+                                    </a>
+                            </li>
+                            <li>
+                                    <button
+                                        class="nav-btn group/nav-item"
+                                        id="sub-nav-trigger-d5a1b7c8-76b9-4766-9d3a-11f5e2308233"
+                                        aria-expanded="false"
+                                        aria-controls="sub-nav-d5a1b7c8-76b9-4766-9d3a-11f5e2308233"
+                                    >
+                                        About Us
+                                        <svg
+                                            class="w-4 h-4 text-grey-dark transition-transform duration-300 group-aria-expanded/nav-item:-rotate-180 lg:hidden"
+                                            aria-hidden="true"
+                                        >
+                                            <use xlink:href="/assets/svg/spritesheet.svg#chevron-down-icon"></use>
+                                        </svg>
+                                    </button>
+                                    <div
+                                        id="sub-nav-d5a1b7c8-76b9-4766-9d3a-11f5e2308233"
+                                        aria-labelledby="sub-nav-trigger-d5a1b7c8-76b9-4766-9d3a-11f5e2308233"
+                                        class="invisible opacity-0 grid grid-rows-[0fr] [&.visible]:grid-rows-[1fr] overflow-hidden lg:absolute lg:top-[87px] lg:left-0 lg:right-0 lg:overflow-visible lg:grid-rows-[1fr]"
+                                    >
+                                        <div class="sub-nav-bg hidden lg:block fixed top-[152px] left-0 h-10 w-full bg-white -z-10"></div>
+                                        <ul class="flex flex-col gap-4 overflow-hidden lg:gap-6 lg:py-7 lg:overflow-visible">
+                                            <li class="pt-6 lg:pt-0">
+                                                <a
+                                                    class="block text-md text-grey-dark lg:inline-block"
+                                                    href="https://property.acandco.com/about/"
+                                                >
+                                                    About Us
+                                                </a>
+                                            </li>
+                                                <li>
+                                                    <a
+                                                        class="block text-md text-grey-dark lg:inline-block"
+                                                        href="https://property.acandco.com/offices/"
+                                                    >
+                                                        Offices
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        class="block text-md text-grey-dark lg:inline-block"
+                                                        href="https://property.acandco.com/latest-news/"
+                                                    >
+                                                        News
+                                                    </a>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </li>
+                            <li>
+                                    <a
+                                        href="https://property.acandco.com/forms/get-in-touch/"
+                                        class="nav-btn"
+                                    >
+                                        Get in Touch
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+        </nav>
+
+            <div class="ml-auto">
+                <button class="group flex"
+                        id="site-search-toggle"
+                        aria-label="site search"
+                        aria-expanded="false"
+                        aria-controls="site-search">
+                    <svg class="w-5 h-5 text-grey-dark group-aria-expanded:hidden lg:group-aria-expanded:block"
+                         aria-hidden="true">
+                        <use xlink:href="/assets/svg/spritesheet.svg#search-icon"></use>
+                    </svg>
+                    <svg class="hidden w-5 h-5 text-grey-dark group-aria-expanded:block lg:group-aria-expanded:hidden"
+                         aria-hidden="true">
+                        <use xlink:href="/assets/svg/spritesheet.svg#close-icon"></use>
+                    </svg>
+                </button>
+                <form action="/search" id="site-search" class="absolute top-full left-0 right-0 bg-white h-[calc(100svh-93.52px)] invisible opacity-0 lg:h-auto" aria-labelledby="site-search-toggle">
+                    <div class="container flex items-center gap-6 border-b border-b-grey-lightest pt-10 pb-11 lg:py-12 lg:border-b-0">
+                        <svg class="w-5 h-5 text-grey-dark"
+                             aria-hidden="true">
+                            <use xlink:href="/assets/svg/spritesheet.svg#search-icon"></use>
+                        </svg>
+                        <input id="searchTerm"
+                               name="searchTerm"
+                               type="text"
+                               class="grow text-md text-grey-dark caret-grey-dark outline-none"
+                               placeholder="Search"
+                               aria-label="site search" />
+                        <button type="reset"
+                                aria-label="clear search"
+                                class="hidden lg:flex">
+                            <svg class="w-4 h-4 text-grey-dark"
+                                 aria-hidden="true">
+                                <use xlink:href="/assets/svg/spritesheet.svg#close-icon"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+    </div>
+</header>
+    <main id="main">
+        
+
+
+
+<section class="relative overflow-hidden">
+    <div class="container flex h-[calc(100svh-93.52px)] min-h-[600px] lg:h-[calc(100svh-152px)]">
+        <div class="max-w-[364px] pt-8 lg:justify-center flex flex-col justify-start pb-8 space-y-4 lg:relative lg:py-28 lg:space-y-6 lg:max-w-[480px]">
+                <h1 class="text-white font-ofelia text-xl leading-snug max-w-[380px] lg:text-5xl text-balance">404 - Page Not found</h1>
+                <p class="text-white leading-snug lg:text-md">This page could not be found.</p>
+                <a
+                    href="https://property.acandco.com/"
+                    class="text-white inline-block text-md underline underline-offset-8 !mt-8"
+                >
+                    Go back
+                </a>
+            <div class="bg-gradient-to-r from-blue to-purple w-[1508px] -translate-x-[840px] -translate-y-[920px] rotate-[24deg] lg:w-[1494px] lg:-translate-x-[940px] lg:-translate-y-[210px] clip-lozenge aspect-lozenge absolute -z-10 opacity-80 lg:opacity-100"></div>
+        </div>
+    </div>
+</section>
+
+        <svg height="0" width="0" aria-hidden="true">
+            <defs>
+                <clipPath id="lozenge" clipPathUnits="objectBoundingBox">
+                    <path d="m0.984,0.729 l-0.187,0.25 c-0.01,0.013,-0.024,0.021,-0.038,0.021 H0.241 c-0.014,0,-0.028,-0.008,-0.038,-0.021 L0.016,0.729 c-0.01,-0.014,-0.016,-0.032,-0.016,-0.051 V0.323 c0,-0.019,0.006,-0.038,0.016,-0.051 L0.203,0.021 c0.01,-0.014,0.024,-0.021,0.038,-0.021 h0.518 c0.014,0,0.028,0.008,0.038,0.021 l0.187,0.251 c0.01,0.014,0.016,0.032,0.016,0.051 v0.354 c0,0.019,-0.006,0.038,-0.016,0.051" />
+                </clipPath>
+            </defs>
+        </svg>
+    </main>
+    
+
+    <footer class="bg-grey-dark text-white">
+        <div>
+            <div class="container py-10 lg:flex lg:flex-col lg:gap-12 lg:py-16">
+                <div class="flex flex-col gap-10 lg:flex-row lg:justify-between">
+                    <div>
+                                <a href="/" class="flex">
+            <img
+                src="/../../media/wubg4ax5/ac-master-logo-horizontal_negative_-rgb.svg"
+                alt="Aberdein Considine Logo"
+                class="block object-contain object-left w-[200px] h-[76px] lg:w-[232px] lg:h-[88px]"
+            />
+        </a>
+
+
+                        <div class="rich-text rich-text--dark text-md mt-8 max-w-[550px]">
+                            <p>As members of the Law Society of Scotland, we are committed to providing our clients with high-quality legal services and uphold the highest ethical standards.<br><br>Aberdein Considine LLP is authorised and regulated by the Financial Conduct Authority under reference number FRN 1012485.</p>
+<!-- Start of SRA Digital Badge code -->
+<p>&nbsp;</p>
+<div style="max-width: 275px; max-height: 163px;">
+<div style="position: relative; padding-bottom: 59.1%; height: auto; overflow: hidden;"><iframe frameborder="0" scrolling="no" allowtransparency="true" src="https://cdn.yoshki.com/iframe/55845r.html" style="border: 0px; margin: 0px; padding: 0px; backgroundcolor: transparent; top: 0px; left: 0px; width: 100%; height: 100%; position: absolute;"></iframe></div>
+</div>
+<!-- End of SRA Digital Badge code -->
+<p>&nbsp;</p>
+<!-- TrustBox widget - Mini -->
+<div class="trustpilot-widget" style="float: left;" data-locale="en-US" data-template-id="53aa8807dec7e10d38f59f32" data-businessunit-id="5b69ad0d8e5136000142fd8c" data-style-height="150px" data-style-width="100%" data-theme="dark" data-token="811dc60e-601b-46d5-b003-d90f2c48f2d5"><a rel="noopener" href="https://www.trustpilot.com/review/www.acandco.com" target="_blank">Trustpilot</a></div>
+<!-- End TrustBox widget -->
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2 class="text-md tracking-wide font-semibold">Main Office</h2>
+                        <p class="mt-4 max-w-52">1st Floor, Blenheim House, Fountainhall Road, Aberdeen, Scotland, AB15 4DT</p>
+                        <p class="mt-4">
+                            <a href="tel:0333 0044333">
+                                0333 0044333
+                            </a>
+                        </p>
+                        <p>
+                            <a href="mailto:ask@acandco.com">
+                                ask@acandco.com
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="">
+                            <h2 class="text-md tracking-wide font-semibold">Follow us</h2>
+                            <ul class="flex flex-wrap gap-2 mt-4">
+                                    <li>
+                                        <a href="https://www.instagram.com/aberdeinconsidine"
+                                           class="block w-[50px] h-[50px] p-3.5 border rounded-circle">
+                                            <img src="/../../media/wmqflh5f/instagram-sjk.svg"
+                                                 alt="Instagram"
+                                                 class="block w-full h-full object-contain" />
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.facebook.com/aberdeinconsidine"
+                                           class="block w-[50px] h-[50px] p-3.5 border rounded-circle">
+                                            <img src="/../../media/ukud4u1u/facebook-sjk.svg"
+                                                 alt="Facebook"
+                                                 class="block w-full h-full object-contain" />
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.linkedin.com/company/aberdein-considine"
+                                           target="_blank"
+                                           class="block w-[50px] h-[50px] p-3.5 border rounded-circle">
+                                            <img src="/../../media/yoqb2ywi/linkedin-sjk.svg"
+                                                 alt="LinkedIn"
+                                                 class="block w-full h-full object-contain" />
+                                        </a>
+                                    </li>
+                            </ul>
+                    </div>
+                </div>
+                <div class="flex flex-col pt-10 gap-10 lg:pt-16 lg:flex-row lg:justify-between lg:items-end">
+                        <ul class="w-[450px] max-w-full">
+                                <li class="">
+                                    <a href="https://payment.acandco.com"
+                                       target="_blank"
+                                       class="flex justify-between items-center gap-6 py-3 border-b border-b-grey-light">
+                                        Payment Portal
+                                        <svg class="w-3 h-3 text-white -rotate-[90deg]"
+                                             aria-hidden="true">
+                                            <use xlink:href="/assets/svg/spritesheet.svg#arrow-down-icon"></use>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="/complaints-procedures/"
+                                       class="flex justify-between items-center gap-6 py-3 border-b border-b-grey-light">
+                                        Complaints Procedures
+                                        <svg class="w-3 h-3 text-white -rotate-[90deg]"
+                                             aria-hidden="true">
+                                            <use xlink:href="/assets/svg/spritesheet.svg#arrow-down-icon"></use>
+                                        </svg>
+                                    </a>
+                                </li>
+                        </ul>
+                    <ul class="flex flex-col gap-6 lg:flex-row lg:gap-12">
+                            <li>
+                                <a href="https://legal.acandco.com"
+                                   class="flex gap-3 items-center text-md">
+                                    <svg class="w-4 h-4 shrink-0"
+                                         aria-hidden="true">
+                                        <use xlink:href="/assets/svg/spritesheet.svg#external-link-icon"></use>
+                                    </svg>
+                                    Legal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.acandco.com"
+                                   class="flex gap-3 items-center text-md">
+                                    <svg class="w-4 h-4 shrink-0"
+                                         aria-hidden="true">
+                                        <use xlink:href="/assets/svg/spritesheet.svg#external-link-icon"></use>
+                                    </svg>
+                                    Firm
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-t-grey-light">
+            <div class="container flex flex-col gap-10 py-6 lg:flex-row lg:justify-between">
+                    <ul class="flex flex-col gap-6 lg:flex-row lg:gap-14">
+                            <li>
+                                <a href="/terms-of-business/" class="text-base">
+                                    Terms of Business
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/policies/" class="text-base">
+                                    Policies
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/corporate-social-responsibility/" class="text-base">
+                                    Corporate Social Responsibility
+                                </a>
+                            </li>
+                    </ul>
+                <p>Aberdein Considine &copy; 2026</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+        <!--Body Scripts -->
+</body>
+</html>
