@@ -7,7 +7,7 @@ import { join, extname } from 'node:path';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const pw = require('playwright');
-const [root, pass] = process.argv.slice(2);
+const [root, pass, dayArg] = process.argv.slice(2); const day = Number(dayArg || 1); // which test day the data is from
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.webmanifest': 'application/manifest+json' };
 const server = createServer(async (req, res) => {
   const p = join(root, decodeURIComponent(req.url.split('?')[0]).replace(/\/$/, '/index.html'));
@@ -28,11 +28,12 @@ const dash = await page.textContent('body');
 check('the dashboard opens with the collected listings', /\[TEST\]/.test(dash), dash.slice(0, 300));
 await page.goto(url + '#p-T1'); await page.waitForTimeout(800);
 const t1 = await page.textContent('body');
-check('1 Example Road shows its price reduction £350,000 → £335,000', /Price reduced/.test(t1) && /£350,000\s*→\s*£335,000/.test(t1), t1.slice(0, 600));
+if (day === 1) check('day 1: 1 Example Road is a new listing at £350,000', /New listing/.test(t1) && /£350,000/.test(t1), t1.slice(0, 600));
+else check('day 2+: 1 Example Road shows its price reduction £350,000 → £335,000 (needs the database from day 1)', /Price reduced/.test(t1) && /£350,000\s*→\s*£335,000/.test(t1), t1.slice(0, 600));
 check('its floor area and type are shown', /140/.test(t1) && /Detached/.test(t1));
 await page.goto(url + '#p-T4'); await page.waitForTimeout(800);
 const t4 = await page.textContent('body');
-check('the agent’s “Sold” is shown as Under offer, not a confirmed sale', /Under offer/.test(t4) && !/Sold \(confirmed\)/.test(t4), t4.slice(0, 400));
+if (day >= 2) check('day 2+: the agent’s “Sold” is shown as Under offer, not a confirmed sale', /Under offer/.test(t4) && !/Sold \(confirmed\)/.test(t4), t4.slice(0, 400));
 await page.goto(url + '#p-T7'); await page.waitForTimeout(800);
 check('a neighbouring village keeps its own name (Drumoak)', /Drumoak/.test(await page.textContent('body')));
 await page.reload(); await page.locator('header.top').waitFor({ timeout: 30000 });

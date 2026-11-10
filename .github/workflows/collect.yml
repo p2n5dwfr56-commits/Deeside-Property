@@ -35,6 +35,7 @@ jobs:
     timeout-minutes: 20
     outputs:
       saved: ${{ steps.save.outputs.saved }}
+      collections: ${{ steps.save.outputs.collections }}
     steps:
       - uses: actions/checkout@v4
       - name: Load the previous database
@@ -67,6 +68,7 @@ jobs:
           git push -q origin "$commit:refs/heads/$DATA_BRANCH"
           echo "Saved database as $commit on $DATA_BRANCH"
           echo "saved=yes" >> "$GITHUB_OUTPUT"
+          echo "collections=$(python3 -c "import sqlite3; print(sqlite3.connect('collector/deeside.db').execute('select count(*) from runs where finished is not null').fetchone()[0])")" >> "$GITHUB_OUTPUT"
       - name: Note when nothing was saved
         if: env.DPW_PASSPHRASE == ''
         run: echo "::warning::DPW_PASSPHRASE is not set, so this run only counted listings. Nothing was saved or published."
@@ -115,4 +117,4 @@ jobs:
         run: |
           npm install --no-save --no-audit --no-fund playwright@1.55.0
           npx playwright install --with-deps chromium
-          node tests/collected-check.mjs dist "$DPW_PASSPHRASE"
+          node tests/collected-check.mjs dist "$DPW_PASSPHRASE" "${{ needs.collect.outputs.collections }}"
