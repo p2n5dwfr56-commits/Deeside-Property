@@ -1,3 +1,7 @@
-# Round 3: ASPC's data host rules and the scripts that load listing details.
-api.aspc.co.uk | /robots.txt /
-www.aspc.co.uk | /assets/js/dist/search.details.js?v=7.81.0.0 /assets/js/dist/common.js?v=7.81.0.0 /assets/js/dist/app.js?v=7.81.0.0
+# Round 4: ASPC's data host forbids automated access (robots.txt "Disallow: /"), so check the local agents' own sites.
+property.acandco.com | /robots.txt / /sitemap
+www.northwooduk.com | /sitemap_index.xml /estate-agents-and-letting-agents/branch/banchory/
+www.peterkins.com | /sitemap_index.xml /
+www.andersonbain.co.uk | /sitemap_index.xml /llms.txt
+www.ledinghamchalmers.com | /property-for-sale/
+struttandparker.com | /offices/banchory
