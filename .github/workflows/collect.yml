@@ -1,19 +1,12 @@
-# Deeside Property Watch: read the myASPC alert emails, compare with what is known, record changes, publish to the website.
-# Run on demand: Actions tab > "Collect listings" > Run workflow. Runs by itself every day at about 09:23 UK time
-# (after myASPC's morning round-up). Secrets (Settings > Secrets and variables > Actions):
-#   IMAP_USER, IMAP_PASSWORD  the mailbox that receives the myASPC emails (Gmail address and its app password)
-#   DPW_PASSPHRASE            encrypts the database and the website's data file (the repository is public)
-# The Aberdein Considine website collector is still available by ticking its box when running by hand.
+# Deeside Property Watch: read the agents' public listing pages, compare with the last collection, record changes,
+# publish to the website. Run on demand: Actions tab > "Collect listings" > Run workflow. Runs by itself daily at
+# about 07:23 UK time. One secret, DPW_PASSPHRASE, encrypts the database and the website's data file (the
+# repository is public); without it a run collects and reports counts only.
 name: Collect listings
 on:
   workflow_dispatch:
-    inputs:
-      agent_site:
-        description: 'Also read the Aberdein Considine website'
-        type: boolean
-        default: false
   schedule:
-    - cron: '23 8 * * *'
+    - cron: '23 6 * * *'
   push:
     branches: ['claude/simple-collector']
     paths: ['collector/collect.py', '.github/workflows/collect.yml']
@@ -30,10 +23,6 @@ jobs:
     timeout-minutes: 20
     env:
       DPW_PASSPHRASE: ${{ secrets.DPW_PASSPHRASE }}
-      IMAP_USER: ${{ secrets.IMAP_USER }}
-      IMAP_PASSWORD: ${{ secrets.IMAP_PASSWORD }}
-      IMAP_HOST: ${{ vars.IMAP_HOST }}
-      IMAP_FOLDER: ${{ vars.IMAP_FOLDER }}
       ENC: -aes-256-cbc -pbkdf2 -iter 200000 -md sha256
     outputs:
       saved: ${{ steps.save.outputs.saved }}
@@ -49,14 +38,7 @@ jobs:
           else
             echo "No previous database: this is the first run."
           fi
-      - name: Read the myASPC alert emails
-        if: env.IMAP_USER != '' && env.IMAP_PASSWORD != ''
-        run: python3 collector/mailbox.py --db collector/deeside.db --days 14
-      - name: Note when no mailbox is set up
-        if: env.IMAP_USER == '' || env.IMAP_PASSWORD == ''
-        run: echo "::warning::IMAP_USER / IMAP_PASSWORD are not set, so no alert emails were read."
-      - name: Read the Aberdein Considine website (only when ticked, or on the development branch)
-        if: inputs.agent_site || github.event_name == 'push'
+      - name: Collect
         run: python3 collector/collect.py --db collector/deeside.db
       - name: Export for the website
         run: python3 collector/export.py --db collector/deeside.db --out collected.json

@@ -15,4 +15,6 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm test
+      - name: Collector comparison test (representative test data)
+        run: python3 collector/test_collect.py
       - run: npm run build

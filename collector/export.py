@@ -41,7 +41,7 @@ def export(db_path):
             'id': r['listing_id'], 'isDemo': False, 'address': r['address'] or r['listing_id'], 'town': r['town'],
             'postcode': r['postcode'], 'askingPrice': r['price'], 'originalAskingPrice': first_price.get(r['listing_id'], r['price']),
             'pricingBasis': BASIS.get((r['price_basis'] or '').lower(), 'Unknown'), 'bedrooms': r['bedrooms'], 'bathrooms': r['bathrooms'],
-            'propertyType': ptype(r['property_type'], r['address']), 'floorAreaSqm': None, 'landSize': None, 'epc': None,
+            'propertyType': ptype(r['property_type'], r['address']), 'floorAreaSqm': r['floor_area_sqm'], 'landSize': None, 'epc': None,
             'homeReportValuation': None, 'agent': r['source'],
             'sources': [{'source': r['source'], 'url': r['url'], 'listingId': r['listing_id'], 'firstSeen': r['first_seen'][:10], 'lastSeen': r['last_seen'][:10]}],
             'dateFirstAdvertised': None, 'dateFirstObserved': r['first_seen'][:10], 'lastVerified': r['last_seen'][:10],

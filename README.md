@@ -1,15 +1,18 @@
 # Deeside Property Watch
 
-## Simple collector (current, 10 Nov 2026)
-Collects real listings from **Aberdein Considine's public property search** (allowed by its robots.txt) for Banchory,
-Torphins, Aboyne and Ballater: address, asking price and basis, status, bedrooms, property type and the listing link.
-Each run saves them to a SQLite database and records every change against the previous run: new listings, price
-reductions and increases, status changes such as Under Offer, and listings that disappear.
-- Run it: GitHub **Actions → Collect listings → Run workflow**. It also runs daily at about 07:23 UK time.
-- See it: the website on GitHub Pages, opened with your passphrase.
-- Code: `collector/collect.py` (collect and compare), `collector/export.py` (data for the website), `.github/workflows/collect.yml`.
-- The database and the website's data file are **encrypted** with the `DPW_PASSPHRASE` secret, because the repository is public.
-- ASPC is not used: its prices and statuses come from `api.aspc.co.uk`, whose robots.txt forbids automated access.
+## Simple collector (current)
+A small Python script (`collector/collect.py`, standard library only) reads the **public property search of Aberdein
+Considine** (allowed by its robots.txt) for Banchory, Torphins, Aboyne, Ballater, Kincardine O'Neil and Lumphanan:
+address, asking price and basis, status, bedrooms, floor area, property type and the listing link. Each run saves to a
+SQLite database and records, against the previous run: new listings, price reductions and increases, Under Offer and
+back-on-the-market, and listings that disappear (flagged, never assumed sold).
+- Run by hand: GitHub **Actions → Collect listings → Run workflow**; it also runs daily. Or on any computer with Python:
+  `python3 collector/collect.py` then `python3 collector/report.py` to see what changed.
+- Test with representative data (no internet): `python3 collector/test_collect.py`.
+- The website shows the results (`collector/export.py` makes its data file). In GitHub the database and data file are
+  encrypted with the `DPW_PASSPHRASE` secret, because the repository is public.
+- **ASPC is not used yet.** Its prices and statuses come from `api.aspc.co.uk`, whose robots.txt forbids automated access,
+  and its terms require ASPC's written consent to copy material from the site.
 
 The email-alert pipeline described below was never connected; its schedule is switched off.
 
