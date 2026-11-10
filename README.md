@@ -1,5 +1,18 @@
 # Deeside Property Watch
 
+## Simple collector (current, 10 Nov 2026)
+Collects real listings from **Aberdein Considine's public property search** (allowed by its robots.txt) for Banchory,
+Torphins, Aboyne and Ballater: address, asking price and basis, status, bedrooms, property type and the listing link.
+Each run saves them to a SQLite database and records every change against the previous run: new listings, price
+reductions and increases, status changes such as Under Offer, and listings that disappear.
+- Run it: GitHub **Actions → Collect listings → Run workflow**. It also runs daily at about 07:23 UK time.
+- See it: the website on GitHub Pages, opened with your passphrase.
+- Code: `collector/collect.py` (collect and compare), `collector/export.py` (data for the website), `.github/workflows/collect.yml`.
+- The database and the website's data file are **encrypted** with the `DPW_PASSPHRASE` secret, because the repository is public.
+- ASPC is not used: its prices and statuses come from `api.aspc.co.uk`, whose robots.txt forbids automated access.
+
+The email-alert pipeline described below was never connected; its schedule is switched off.
+
 A private service that watches homes for sale around Torphins, Banchory, Aboyne, Ballater, Kincardine O'Neil and
 Lumphanan. It collects the property alerts that ASPC, Rightmove, Zoopla, OnTheMarket and agents send. Every 3 hours,
 without you, it records:
