@@ -8,8 +8,12 @@ import argparse, json, os, sqlite3, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import collect
 
+# The agent's own status words are kept unchanged in the database. For the app they are mapped to its statuses, but
+# an agent's "Sold" / "Sold STC" is NOT treated as a completed sale (that needs confirmation, e.g. by you): it is shown
+# as Under offer, and the event keeps the agent's exact wording.
 STATUS = {'for sale': 'for_sale', 'under offer': 'under_offer', 'closing date': 'closing_date', 'closing date set': 'closing_date',
-          'sold': 'sold', 'sold stc': 'under_offer', 'withdrawn': 'withdrawn'}
+          'sold': 'under_offer', 'sold stc': 'under_offer', 'sold subject to contract': 'under_offer', 'let agreed': 'under_offer',
+          'withdrawn': 'for_sale'}
 BASIS = {'offers over': 'Offers over', 'fixed price': 'Fixed price', 'offers around': 'Offers around',
          'offers in the region of': 'Offers in the region of', 'guide price': 'Guide price', 'price on application': 'Price on application'}
 TYPE_WORDS = [('semi', 'Semi-detached'), ('detached', 'Detached'), ('terrace', 'Terraced'), ('bungalow', 'Bungalow'),
@@ -38,7 +42,7 @@ def export(db_path):
         'ON o.listing_id=f.listing_id AND o.run_id=f.r')}
     for r in con.execute('SELECT * FROM listings ORDER BY first_seen, listing_id'):
         props.append({
-            'id': r['listing_id'], 'isDemo': False, 'address': r['address'] or r['listing_id'], 'town': r['town'],
+            'id': r['listing_id'], 'isDemo': False, 'address': r['address'] or r['listing_id'], 'town': r['town'],  # the actual village or town, from the address
             'postcode': r['postcode'], 'askingPrice': r['price'], 'originalAskingPrice': first_price.get(r['listing_id'], r['price']),
             'pricingBasis': BASIS.get((r['price_basis'] or '').lower(), 'Unknown'), 'bedrooms': r['bedrooms'], 'bathrooms': r['bathrooms'],
             'propertyType': ptype(r['property_type'], r['address']), 'floorAreaSqm': r['floor_area_sqm'], 'landSize': None, 'epc': None,
@@ -60,9 +64,10 @@ def export(db_path):
         elif k == 'status_changed':
             sb, sa = status(old), status(new)
             e.update(statusBefore=sb, statusAfter=sa, confidence='reported',
-                     type={'under_offer': 'under_offer', 'closing_date': 'closing_date', 'sold': 'sold', 'withdrawn': 'withdrawn'}.get(sa,
+                     type={'under_offer': 'under_offer', 'closing_date': 'closing_date'}.get(sa,
                           'returned_to_market' if sb in ('under_offer', 'closing_date') else 'details_changed'),
-                     changes=[{'field': 'status', 'before': old, 'after': new}])
+                     changes=[{'field': "agent's status", 'before': old, 'after': new}],
+                     evidence=f"Agent's listing changed from \u201c{old}\u201d to \u201c{new}\u201d" + (' (not confirmed as a completed sale)' if 'sold' in (new or '').lower() else ''))
         elif k == 'basis_changed':
             e.update(type='basis_change', basisBefore=BASIS.get((old or '').lower(), 'Unknown'), basisAfter=BASIS.get((new or '').lower(), 'Unknown'))
         elif k == 'no_longer_listed':

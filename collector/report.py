@@ -9,7 +9,8 @@ def describe(kind, old, new):
     return {'new_listing': lambda: f'New listing at {money(new)}',
             'price_reduced': lambda: f'Price reduced {money(old)} → {money(new)} ({money(int(old) - int(new))} less)',
             'price_increased': lambda: f'Price increased {money(old)} → {money(new)}',
-            'status_changed': lambda: f'Status {old} → {new}' + (' (back on the market)' if (old or '').lower().startswith('under') and (new or '').lower() == 'for sale' else ''),
+            'status_changed': lambda: f'Status {old} → {new}' + (' (back on the market)' if (old or '').lower().startswith(('under', 'sold')) and (new or '').lower() == 'for sale' else '')
+                              + (' (the agent’s label; not confirmed as a completed sale)' if 'sold' in (new or '').lower() else ''),
             'basis_changed': lambda: f'Pricing basis {old} → {new}',
             'no_longer_listed': lambda: 'No longer listed (not in any town’s results; not confirmed as sold or withdrawn)',
             'relisted': lambda: 'Listed again'}.get(kind, lambda: kind)()
@@ -23,7 +24,7 @@ def report(db, run=None, every=False):
     out = []
     for rid, fin, n, new, ch in pick:
         out.append(f'Collection {rid} ({(fin or "")[:16].replace("T", " ")}): {n} listings, {ch} changes')
-        for addr, kind, old, new_ in con.execute('SELECT l.address, c.kind, c.old_value, c.new_value FROM changes c JOIN listings l '
+        for addr, kind, old, new_ in con.execute('SELECT l.address || CASE WHEN l.in_area=0 THEN " [near the six towns: " || l.town || "]" ELSE "" END, c.kind, c.old_value, c.new_value FROM changes c JOIN listings l '
                                                  'USING (listing_id) WHERE c.run_id=? ORDER BY c.kind, l.address', (rid,)):
             out.append(f'  • {addr}: {describe(kind, old, new_)}')
     return '\n'.join(out)

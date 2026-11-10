@@ -6,7 +6,7 @@ listing pages. For each town it reads the search results, saves every listing to
 last time, and records each change (new listing, price reduced or increased, status change, pricing basis change,
 no longer listed).
 
-Usage:  python3 collector/collect.py [--db collector/deeside.db] [--towns Banchory,Torphins,Aboyne,Ballater]
+Usage:  python3 collector/collect.py [--db collector/deeside.db] [--towns ...]   (default: the six Deeside towns)
 Plain Python 3 standard library only. Polite: one request every few seconds, identifies itself, obeys robots.txt.
 """
 import argparse, datetime as dt, html, json, re, sqlite3, sys, time, urllib.parse, urllib.request, urllib.robotparser
@@ -22,7 +22,9 @@ CREATE TABLE IF NOT EXISTS runs (id INTEGER PRIMARY KEY, started TEXT, finished 
   listings INTEGER, new INTEGER, changes INTEGER, complete_towns TEXT, errors TEXT);
 CREATE TABLE IF NOT EXISTS listings (listing_id TEXT PRIMARY KEY, source TEXT, url TEXT, address TEXT, town TEXT,
   postcode TEXT, price INTEGER, price_text TEXT, price_basis TEXT, status TEXT, bedrooms INTEGER, bathrooms INTEGER,
-  living_rooms INTEGER, property_type TEXT, floor_area_sqm REAL, first_seen TEXT, last_seen TEXT, listed INTEGER DEFAULT 1);
+  living_rooms INTEGER, property_type TEXT, floor_area_sqm REAL, first_seen TEXT, last_seen TEXT, listed INTEGER DEFAULT 1,
+  postal_town TEXT, in_area INTEGER, searched_town TEXT);
+CREATE TABLE IF NOT EXISTS pages (run_id INTEGER, town TEXT, page INTEGER, cards INTEGER, fresh INTEGER, has_next INTEGER);
 CREATE TABLE IF NOT EXISTS observations (run_id INTEGER, listing_id TEXT, seen_at TEXT, price INTEGER, price_basis TEXT,
   status TEXT, PRIMARY KEY (run_id, listing_id));
 CREATE TABLE IF NOT EXISTS changes (id INTEGER PRIMARY KEY, run_id INTEGER, listing_id TEXT, at TEXT, kind TEXT,
@@ -105,11 +107,36 @@ def parse_detail(page):
             return lines[i + 2].capitalize(), area
     return None, area
 
+
+TOWNS = ['Torphins', 'Banchory', 'Aboyne', 'Ballater', "Kincardine O'Neil", 'Lumphanan']
+STREET = re.compile(r"\d|\b(road|street|st|avenue|drive|gardens|crescent|place|terrace|court|lane|way|view|park|brae|wynd|close|row|"
+                    r"square|grove|walk|steading|cottages?|farm|house|lodge|mains|plot|flat|apartment|development)\b", re.I)
+def _norm(s):
+    return re.sub(r"[^a-z]", "", (s or '').lower().replace("’", "'"))
+
+def locate(address, searched):
+    """(locality, postal town, in one of the six towns?) from an address such as
+    'Rowanbrae, Main Road, Lumphanan, Banchory, Aberdeenshire, AB31 4PX' -> ('Lumphanan', 'Banchory', True)
+    'Lochton Steading, Durris, Banchory, AB31 6DB'                     -> ('Durris', 'Banchory', False)
+    The search that found a listing is only used when the address names no place at all."""
+    parts = [p.strip() for p in (address or '').split(',') if p.strip()]
+    parts = [p for p in parts if not re.fullmatch(r'AB\d{1,2}\s*\d[A-Z]{2}|Aberdeenshire|Scotland|United Kingdom|UK', p, re.I)]
+    places = [p for p in parts[1:] if not STREET.search(p)]          # the first part is the house or street
+    if not places:
+        return searched, searched, any(_norm(searched) == _norm(t) for t in TOWNS)
+    postal, locality = places[-1], places[-2] if len(places) > 1 else places[-1]
+    for t in TOWNS:                                                    # spell the six towns consistently
+        if _norm(locality) == _norm(t):
+            return t, postal, True
+    return locality, postal, False
+
 def collect(db_path, towns):
     con = sqlite3.connect(db_path)
     con.executescript(SCHEMA)
-    if 'floor_area_sqm' not in [r[1] for r in con.execute('PRAGMA table_info(listings)')]:
-        con.execute('ALTER TABLE listings ADD COLUMN floor_area_sqm REAL')
+    have = [r[1] for r in con.execute('PRAGMA table_info(listings)')]
+    for col, kind in [('floor_area_sqm', 'REAL'), ('postal_town', 'TEXT'), ('in_area', 'INTEGER'), ('searched_town', 'TEXT')]:
+        if col not in have:  # databases made by an earlier version
+            con.execute(f'ALTER TABLE listings ADD COLUMN {col} {kind}')
     started = now()
     run_id = con.execute('INSERT INTO runs (started) VALUES (?)', (started,)).lastrowid
     f, errors, seen, complete = Fetcher(), [], {}, []
@@ -122,8 +149,10 @@ def collect(db_path, towns):
                 cards = parse_results(page)
                 fresh = [c for c in cards if c['listing_id'] not in seen]
                 for c in cards:
-                    seen.setdefault(c['listing_id'], dict(c, town=town))
-                if not fresh or f'page={page_no + 1}' not in page:
+                    seen.setdefault(c['listing_id'], dict(c, searched=town))
+                has_next = f'page={page_no + 1}"' in page or f'page={page_no + 1}&' in page
+                con.execute('INSERT INTO pages VALUES (?,?,?,?,?,?)', (run_id, town, page_no, len(cards), len(fresh), int(has_next)))
+                if not fresh or not has_next:
                     got_all = True
                     break
             if got_all:
@@ -139,6 +168,7 @@ def collect(db_path, towns):
                     (run_id, lid, at, kind, None if old is None else str(old), None if new_ is None else str(new_)))
         changed += 1
     for lid, c in seen.items():
+        c['town'], c['postal_town'], c['in_area'] = locate(c['address'], c['searched'])
         row = con.execute('SELECT price, price_basis, status, listed, property_type, floor_area_sqm FROM listings WHERE listing_id=?', (lid,)).fetchone()
         ptype, area = (row[4], row[5]) if row else (None, None)
         if not ptype:  # each listing's own page is read once, for its property type and floor area
@@ -148,10 +178,10 @@ def collect(db_path, towns):
                 errors.append(f'{lid} details: {e}')
         if row is None:
             con.execute('''INSERT INTO listings (listing_id, source, url, address, town, postcode, price, price_text, price_basis,
-                status, bedrooms, bathrooms, living_rooms, property_type, floor_area_sqm, first_seen, last_seen, listed)
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1)''', (lid, SOURCE, c['url'], c['address'], c['town'], c['postcode'],
-                c['price'], c['price_text'], c['price_basis'], c['status'], c['bedrooms'], c['bathrooms'], c['living_rooms'],
-                ptype, area, at, at))
+                status, bedrooms, bathrooms, living_rooms, property_type, floor_area_sqm, first_seen, last_seen, listed, postal_town, in_area,
+                searched_town) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,?,?)''', (lid, SOURCE, c['url'], c['address'], c['town'],
+                c['postcode'], c['price'], c['price_text'], c['price_basis'], c['status'], c['bedrooms'], c['bathrooms'], c['living_rooms'],
+                ptype, area, at, at, c['postal_town'], int(c['in_area']), c['searched']))
             change(lid, 'new_listing', None, c['price'])
             new += 1
         else:
@@ -164,10 +194,10 @@ def collect(db_path, towns):
                 change(lid, 'basis_changed', old_basis, c['price_basis'])
             if c['status'] != old_status:
                 change(lid, 'status_changed', old_status, c['status'])
-            con.execute('''UPDATE listings SET url=?, address=?, postcode=?, price=?, price_text=?, price_basis=?, status=?,
+            con.execute('''UPDATE listings SET town=?, postal_town=?, in_area=?, url=?, address=?, postcode=?, price=?, price_text=?, price_basis=?, status=?,
                 bedrooms=?, bathrooms=?, living_rooms=?, property_type=?, floor_area_sqm=?, last_seen=?, listed=1 WHERE listing_id=?''',
-                (c['url'], c['address'], c['postcode'], c['price'], c['price_text'], c['price_basis'], c['status'],
-                 c['bedrooms'], c['bathrooms'], c['living_rooms'], ptype, area, at, lid))
+                (c['town'], c['postal_town'], int(c['in_area']), c['url'], c['address'], c['postcode'], c['price'], c['price_text'],
+                 c['price_basis'], c['status'], c['bedrooms'], c['bathrooms'], c['living_rooms'], ptype, area, at, lid))
         con.execute('INSERT OR REPLACE INTO observations VALUES (?,?,?,?,?,?)', (run_id, lid, at, c['price'], c['price_basis'], c['status']))
     # A listing is "no longer listed" only when every town's results were read completely and it wasn't in any of them.
     if len(complete) == len(towns):
@@ -187,7 +217,18 @@ if __name__ == '__main__':
     a = argparse.ArgumentParser()
     a.add_argument('--db', default='collector/deeside.db')
     a.add_argument('--towns', default="Banchory,Torphins,Aboyne,Ballater,Kincardine O'Neil,Lumphanan")
+    a.add_argument('--test-site', action='store_true', help='use the pretend website with fictional [TEST] listings (testsite.py)')
     o = a.parse_args()
+    if o.test_site:  # day 1, 2, 3 ... of the test scenario, following the collections already in the database
+        import os, testsite
+        n = 0
+        if os.path.exists(o.db):
+            try:
+                n = sqlite3.connect(o.db).execute('SELECT COUNT(*) FROM runs WHERE finished IS NOT NULL').fetchone()[0]
+            except sqlite3.Error:
+                n = 0
+        Fetcher = testsite.fetcher_for(n + 1)
+        print(f'TEST SITE (fictional listings), day {n + 1}')
     r = collect(o.db, [t.strip() for t in o.towns.split(',') if t.strip()])
     # Counts only: the workflow log is public, so no addresses or prices are printed.
     print(f"Run {r['run']}: {r['requests']} pages read, {r['listings']} listings, {r['new']} new, {r['changes']} changes recorded, "

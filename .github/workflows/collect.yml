@@ -1,7 +1,14 @@
-# Deeside Property Watch: read the agents' public listing pages, compare with the last collection, record changes,
-# publish to the website. Run on demand: Actions tab > "Collect listings" > Run workflow. Runs by itself daily at
-# about 07:23 UK time. One secret, DPW_PASSPHRASE, encrypts the database and the website's data file (the
-# repository is public); without it a run collects and reports counts only.
+# Deeside Property Watch: read the agent's public listing pages, compare with the last collection, record changes,
+# and publish the website. Run by hand: Actions tab > "Collect listings" > Run workflow. Also runs daily, ~07:23 UK.
+#
+# Setup (once): the secret DPW_PASSPHRASE, and Settings > Pages > Source: GitHub Actions. See README.md.
+#
+# The database lives, encrypted with DPW_PASSPHRASE, on the branch "collector-data": each run loads the previous
+# database, adds to it, and saves it as a new commit on top (so the branch also keeps every earlier version).
+#
+# On the development branch the same steps run against the pretend website with fictional [TEST] listings
+# (collector/testsite.py), a public test passphrase and the separate branch "collector-data-test", and the built
+# website is checked in a browser instead of being published.
 name: Collect listings
 on:
   workflow_dispatch:
@@ -9,58 +16,65 @@ on:
     - cron: '23 6 * * *'
   push:
     branches: ['claude/simple-collector']
-    paths: ['collector/collect.py', '.github/workflows/collect.yml']
+    paths: ['collector/**', '.github/workflows/collect.yml', 'tests/collected-check.mjs', 'src/**']
 permissions:
   contents: write
   pages: write
   id-token: write
 concurrency:
-  group: collect-listings
+  group: collect-listings-${{ github.ref }}
   cancel-in-progress: false
+env:
+  LIVE: ${{ github.ref == 'refs/heads/main' }}
+  DATA_BRANCH: ${{ github.ref == 'refs/heads/main' && 'collector-data' || 'collector-data-test' }}
+  DPW_PASSPHRASE: ${{ github.ref == 'refs/heads/main' && secrets.DPW_PASSPHRASE || 'test-only-passphrase-not-secret' }}
+  ENC: -aes-256-cbc -pbkdf2 -iter 200000 -md sha256
 jobs:
   collect:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    env:
-      DPW_PASSPHRASE: ${{ secrets.DPW_PASSPHRASE }}
-      ENC: -aes-256-cbc -pbkdf2 -iter 200000 -md sha256
     outputs:
       saved: ${{ steps.save.outputs.saved }}
     steps:
       - uses: actions/checkout@v4
-      - name: Load the previous database (encrypted, branch collector-data)
+      - name: Load the previous database
         if: env.DPW_PASSPHRASE != ''
         run: |
-          if git fetch -q origin collector-data 2>/dev/null; then
-            git show FETCH_HEAD:deeside.db.enc > /tmp/db.enc
-            openssl enc -d $ENC -in /tmp/db.enc -out collector/deeside.db -pass env:DPW_PASSPHRASE
-            echo "Previous database loaded."
+          if git fetch -q --depth=1 origin "$DATA_BRANCH"; then
+            git show FETCH_HEAD:deeside.db.enc > "$RUNNER_TEMP/previous.db.enc"
+            openssl enc -d $ENC -in "$RUNNER_TEMP/previous.db.enc" -out collector/deeside.db -pass env:DPW_PASSPHRASE
+            python3 -c "import sqlite3; c=sqlite3.connect('collector/deeside.db'); q=lambda s: c.execute(s).fetchone()[0]; print(f'Previous database loaded from {\"$DATA_BRANCH\"}: {q(\"select count(*) from runs where finished is not null\")} collections, {q(\"select count(*) from listings\")} listings, {q(\"select count(*) from changes\")} recorded changes')"
           else
-            echo "No previous database: this is the first run."
+            echo "No previous database on $DATA_BRANCH: this is the first collection."
           fi
       - name: Collect
-        run: python3 collector/collect.py --db collector/deeside.db
+        run: python3 collector/collect.py --db collector/deeside.db $([ "$LIVE" = true ] || echo --test-site)
+      - name: Show what changed (test data only; live addresses are never printed because this log is public)
+        if: env.LIVE != 'true'
+        run: python3 collector/report.py --db collector/deeside.db --all
       - name: Export for the website
         run: python3 collector/export.py --db collector/deeside.db --out collected.json
-      - name: Save the database (encrypted)
+      - name: Save the database (encrypted) as a new commit on the data branch
         id: save
         if: env.DPW_PASSPHRASE != ''
         run: |
-          mkdir -p /tmp/out && cd /tmp/out && git init -q && git checkout -q -b collector-data
-          if git -C "$GITHUB_WORKSPACE" fetch -q origin collector-data 2>/dev/null; then git fetch -q "$GITHUB_WORKSPACE" FETCH_HEAD && git reset -q --soft FETCH_HEAD; fi
-          openssl enc $ENC -salt -in "$GITHUB_WORKSPACE/collector/deeside.db" -out deeside.db.enc -pass env:DPW_PASSPHRASE
-          git add deeside.db.enc
-          git -c user.name=collector -c user.email=collector@users.noreply.github.com commit -qm "Collection $(date -u +%FT%TZ)"
-          git push -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" collector-data
+          openssl enc $ENC -salt -in collector/deeside.db -out "$RUNNER_TEMP/deeside.db.enc" -pass env:DPW_PASSPHRASE
+          blob=$(git hash-object -w "$RUNNER_TEMP/deeside.db.enc")
+          tree=$(printf '100644 blob %s\tdeeside.db.enc\n' "$blob" | git mktree)
+          parent=""
+          if git fetch -q --depth=1 origin "$DATA_BRANCH"; then parent="-p $(git rev-parse FETCH_HEAD)"; fi
+          commit=$(git -c user.name=collector -c user.email=collector@users.noreply.github.com commit-tree "$tree" $parent -m "Collection $(date -u +%FT%TZ)")
+          git push -q origin "$commit:refs/heads/$DATA_BRANCH"
+          echo "Saved database as $commit on $DATA_BRANCH"
           echo "saved=yes" >> "$GITHUB_OUTPUT"
       - name: Note when nothing was saved
         if: env.DPW_PASSPHRASE == ''
         run: echo "::warning::DPW_PASSPHRASE is not set, so this run only counted listings. Nothing was saved or published."
       - name: Encrypt the website's data file
-        if: env.DPW_PASSPHRASE != ''
+        if: steps.save.outputs.saved == 'yes'
         run: openssl enc $ENC -salt -in collected.json -out collected.enc -pass env:DPW_PASSPHRASE
       - uses: actions/upload-artifact@v4
-        if: env.DPW_PASSPHRASE != ''
+        if: steps.save.outputs.saved == 'yes'
         with: { name: collected-enc, path: collected.enc, retention-days: 2 }
 
   website:
@@ -82,3 +96,23 @@ jobs:
         with: { path: dist }
       - id: deploy
         uses: actions/deploy-pages@v4
+
+  website-test:
+    needs: collect
+    if: needs.collect.outputs.saved == 'yes' && github.ref != 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+        env: { VITE_COLLECTED: '1' }
+      - uses: actions/download-artifact@v4
+        with: { name: collected-enc, path: dist }
+      - name: Open the built website in a browser and check it shows the recorded changes
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.55.0
+          npx playwright install --with-deps chromium
+          node tests/collected-check.mjs dist "$DPW_PASSPHRASE"
