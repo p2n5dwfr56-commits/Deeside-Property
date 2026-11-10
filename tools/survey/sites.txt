@@ -1,0 +1,19 @@
+# domain | pages to fetch (relative), space separated
+www.aspc.co.uk | /robots.txt / /sitemap.xml
+www.acandco.com | /robots.txt / /sitemap.xml /property-for-sale
+property.acandco.com | /robots.txt
+www.northwooduk.com | /robots.txt / /sitemap.xml
+struttandparker.com | /robots.txt
+www.peterkins.com | /robots.txt / /sitemap.xml
+www.rccw.co.uk | /robots.txt / /sitemap.xml
+www.mackinnons.com | /robots.txt / /sitemap.xml
+www.galbraithgroup.com | /robots.txt / /sitemap.xml
+www.burnett-reid.co.uk | /robots.txt /
+www.ledinghamchalmers.com | /robots.txt / /sitemap.xml
+www.andersonbain.co.uk | /robots.txt /
+www.gilsongray.co.uk | /robots.txt /
+www.espc.com | /robots.txt
+www.s1homes.com | /robots.txt
+www.rightmove.co.uk | /robots.txt
+www.zoopla.co.uk | /robots.txt
+www.onthemarket.com | /robots.txt

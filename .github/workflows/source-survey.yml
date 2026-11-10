@@ -1,0 +1,22 @@
+# One-off: fetch robots.txt and a few public pages of candidate property sources, and save them to the
+# branch "source-survey" so the sources can be evaluated. Reads only; changes nothing else.
+name: Source survey
+on:
+  push:
+    branches: ['claude/simple-collector']
+    paths: ['tools/survey/**']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  survey:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: tools/survey/survey.sh
+      - name: Save to branch source-survey
+        run: |
+          cd survey && git init -q && git checkout -q -b source-survey && git add -A
+          git -c user.name=survey -c user.email=survey@users.noreply.github.com commit -qm "Source survey $(date -u +%FT%TZ)"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" source-survey
