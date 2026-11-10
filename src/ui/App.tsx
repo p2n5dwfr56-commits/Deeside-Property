@@ -13,6 +13,7 @@ import { Alerts } from './Alerts';
 import { Analysis } from './Analysis';
 import { SettingsPage } from './SettingsPage';
 import { Monitoring } from './Monitoring';
+import { collectedMode, loadCollected, rememberPass, savedPass } from '../collected';
 import { CloudConflict, cloudConfigured, currentSession, loadCloud, onAuthChange, saveCloud, sendLoginLink, signOut } from '../cloud';
 
 export interface Ctx { db: Db; commit: (db: Db) => boolean; go: (path: string) => void; now: string; areaTowns: string[]; cloud: boolean }
@@ -26,7 +27,32 @@ export function areaTowns(db: Db) {
   return t.filter((x) => db.settings.radiusKm == null || !centre || !Number.isFinite(x.lat) || x.lat == null || distanceKm(centre, x) <= db.settings.radiusKm).map((x) => x.name);
 }
 
-export function App() { return cloudConfigured ? <CloudApp /> : <LocalApp />; }
+export function App() { return cloudConfigured ? <CloudApp /> : collectedMode ? <CollectedApp /> : <LocalApp />; }
+
+/** Collected mode: listings gathered by the daily collector (an encrypted file published with the site), opened with your passphrase. */
+function CollectedApp() {
+  const [db, setDb] = useState<Db | null>(null); const [err, setErr] = useState<string | null>(null); const [busy, setBusy] = useState(false);
+  const [pass, setPass] = useState(''); const [remember, setRemember] = useState(true);
+  const open = useCallback(async (p: string, keep: boolean) => {
+    setBusy(true); setErr(null);
+    try { const d = await loadCollected(p, load()); rememberPass(keep ? p : null); setDb(checkLongOnMarket(d, today())); }
+    catch (e) { setErr((e as Error).message); if (keep) rememberPass(null); }
+    finally { setBusy(false); }
+  }, []);
+  useEffect(() => { const p = savedPass(); if (p) open(p, true); }, [open]);
+  if (!db) return (
+    <main><form className="card stack" style={{ maxWidth: 440, margin: '40px auto' }} onSubmit={(e) => { e.preventDefault(); open(pass, remember); }}>
+      <h1>Deeside Property Watch</h1>
+      <p className="small">Listings collected automatically each day. Enter your passphrase to open them.</p>
+      <label>Passphrase<input id="passphrase" type="password" required value={pass} onChange={(e) => setPass(e.target.value)} autoComplete="current-password" /></label>
+      <label className="small"><input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} /> Remember on this device</label>
+      {err && <div className="banner err" role="alert">{err}</div>}
+      <button className="primary" disabled={busy}>{busy ? 'Opening…' : 'Open'}</button>
+    </form></main>
+  );
+  const commit = (next: Db) => { const r = save(next); setDb(next); return r.ok; };
+  return <Shell db={db} commit={commit} cloud={false} onSignOut={() => { rememberPass(null); location.reload(); }} />;
+}
 
 /** Offline/preview mode: data kept in this browser. */
 function LocalApp() {

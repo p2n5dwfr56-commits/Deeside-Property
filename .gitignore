@@ -3,3 +3,7 @@ dist/
 dist-preview/
 tests/screens/
 .env*
+collector/*.db
+collector/__pycache__/
+collected.json
+collected.enc
