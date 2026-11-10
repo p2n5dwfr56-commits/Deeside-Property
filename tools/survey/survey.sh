@@ -8,7 +8,7 @@ grep -v '^#' tools/survey/sites.txt | while IFS='|' read -r dom pages; do
   for pg in $pages; do
     f=survey/$dom/$(echo "$pg" | tr '/?=&' '____' | sed 's/^_$/_root/')
     code=$(curl -sS -L -A "$UA" -m 25 -o "$f.body" -w '%{http_code} %{url_effective} %{size_download}' "https://$dom$pg" 2>&1 | tail -1)
-    echo "$code" > "$f.status"; head -c 400000 "$f.body" > "$f.txt"; rm -f "$f.body"; sleep 2
+    echo "$code" > "$f.status"; head -c 3000000 "$f.body" > "$f.txt"; rm -f "$f.body"; sleep 2
   done
 done
 for s in survey/*/*.status; do echo "$s: $(cat $s)"; done > survey/INDEX.txt
