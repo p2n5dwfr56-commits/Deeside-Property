@@ -33,7 +33,8 @@ else check('day 2+: 1 Example Road shows its price reduction £350,000 → £335
 check('its floor area and type are shown', /140/.test(t1) && /Detached/.test(t1));
 await page.goto(url + '#p-T4'); await page.waitForTimeout(800);
 const t4 = await page.textContent('body');
-if (day >= 2) check('day 2+: the agent’s “Sold” is shown as Under offer, not a confirmed sale', /Under offer/.test(t4) && !/Sold \(confirmed\)/.test(t4), t4.slice(0, 400));
+if (day >= 2) { const pill = await page.locator('.pill[class*="st-"]').first().textContent(); const sold = await page.locator('.pill.st-sold').count();
+  check('day 2+: the agent’s “Sold” is shown as Under offer, not a confirmed sale', pill === 'Under offer' && sold === 0, `status badge: ${pill}`); }
 await page.goto(url + '#p-T7'); await page.waitForTimeout(800);
 check('a neighbouring village keeps its own name (Drumoak)', /Drumoak/.test(await page.textContent('body')));
 await page.reload(); await page.locator('header.top').waitFor({ timeout: 30000 });
