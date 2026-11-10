@@ -4,7 +4,9 @@ interface shows the collected listings and their change history.
 
 Usage: python3 collector/export.py [--db collector/deeside.db] [--out collected.json]
 """
-import argparse, json, sqlite3
+import argparse, json, os, sqlite3, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import collect
 
 STATUS = {'for sale': 'for_sale', 'under offer': 'under_offer', 'closing date': 'closing_date', 'closing date set': 'closing_date',
           'sold': 'sold', 'sold stc': 'under_offer', 'withdrawn': 'withdrawn'}
@@ -28,6 +30,7 @@ def ptype(t, address):
 
 def export(db_path):
     con = sqlite3.connect(db_path)
+    con.executescript(collect.SCHEMA)  # an empty database (no source set up yet) exports as no properties
     con.row_factory = sqlite3.Row
     props, events = [], []
     first_price = {r['listing_id']: r['price'] for r in con.execute(
@@ -44,12 +47,12 @@ def export(db_path):
             'dateFirstAdvertised': None, 'dateFirstObserved': r['first_seen'][:10], 'lastVerified': r['last_seen'][:10],
             'status': status(r['status'], r['listed']), 'closingDate': None, 'photoUrl': None, 'photoPermitted': False,
             'notes': '', 'watched': False})
-    for c in con.execute('SELECT c.*, l.price lp FROM changes c JOIN listings l USING (listing_id) ORDER BY c.id'):
+    for c in con.execute('SELECT c.*, l.price lp, l.source src FROM changes c JOIN listings l USING (listing_id) ORDER BY c.id'):
         k, old, new = c['kind'], c['old_value'], c['new_value']
         e = {'id': f"c{c['id']}", 'propertyId': c['listing_id'], 'date': c['at'][:10], 'recordedAt': c['at'], 'priceBefore': None,
              'priceAfter': None, 'basisBefore': None, 'basisAfter': None, 'statusBefore': None, 'statusAfter': None, 'changes': [],
-             'origin': f"Collector run {c['run_id']}", 'importId': None, 'source': 'Aberdein Considine', 'confidence': 'detected',
-             'evidence': 'Agent website search results'}
+             'origin': f"Collector run {c['run_id']}", 'importId': None, 'source': c['src'], 'confidence': 'detected',
+             'evidence': 'myASPC alert email' if c['src'] == 'ASPC' else 'Agent website search results'}
         if k == 'new_listing':
             e.update(type='listed', priceAfter=int(new) if new else None, confidence='reported')
         elif k in ('price_reduced', 'price_increased'):
@@ -72,7 +75,7 @@ def export(db_path):
     runs = []
     for r in con.execute('SELECT * FROM runs WHERE finished IS NOT NULL ORDER BY id DESC LIMIT 60'):
         runs.append({'id': f"run{r['id']}", 'startedAt': r['started'], 'finishedAt': r['finished'], 'trigger': 'schedule',
-                     'mailbox': 'Aberdein Considine website', 'ok': bool(r['ok']), 'messagesChecked': r['pages'] or 0, 'messagesNew': 0,
+                     'mailbox': 'myASPC alert emails' if r['complete_towns'] == 'email' else 'Aberdein Considine website', 'ok': bool(r['ok']), 'messagesChecked': r['pages'] or 0, 'messagesNew': 0,
                      'listingsRead': r['listings'] or 0, 'created': r['new'] or 0, 'updated': r['changes'] or 0, 'unchanged': 0,
                      'flagged': 0, 'errors': json.loads(r['errors'] or '[]')})
     return {'version': 2, 'properties': props, 'events': events, 'imports': [], 'alerts': [], 'settings': {}, 'reviews': [],
