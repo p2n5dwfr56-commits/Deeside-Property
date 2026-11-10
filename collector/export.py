@@ -9,10 +9,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import collect
 
 # The agent's own status words are kept unchanged in the database. For the app they are mapped to its statuses, but
-# an agent's "Sold" / "Sold STC" is NOT treated as a completed sale (that needs confirmation, e.g. by you): it is shown
+# an agent's "Sold", "Sold STC" or "Completed" is NOT treated as a completed sale (that needs confirmation, e.g. by you): it is shown
 # as Under offer, and the event keeps the agent's exact wording.
 STATUS = {'for sale': 'for_sale', 'under offer': 'under_offer', 'closing date': 'closing_date', 'closing date set': 'closing_date',
-          'sold': 'under_offer', 'sold stc': 'under_offer', 'sold subject to contract': 'under_offer', 'let agreed': 'under_offer',
+          'sold': 'under_offer', 'completed': 'under_offer', 'sale completed': 'under_offer', 'sold stc': 'under_offer', 'sold subject to contract': 'under_offer', 'let agreed': 'under_offer',
           'withdrawn': 'for_sale'}
 BASIS = {'offers over': 'Offers over', 'fixed price': 'Fixed price', 'offers around': 'Offers around',
          'offers in the region of': 'Offers in the region of', 'guide price': 'Guide price', 'price on application': 'Price on application'}
@@ -67,7 +67,7 @@ def export(db_path):
                      type={'under_offer': 'under_offer', 'closing_date': 'closing_date'}.get(sa,
                           'returned_to_market' if sb in ('under_offer', 'closing_date') else 'details_changed'),
                      changes=[{'field': "agent's status", 'before': old, 'after': new}],
-                     evidence=f"Agent's listing changed from \u201c{old}\u201d to \u201c{new}\u201d" + (' (not confirmed as a completed sale)' if 'sold' in (new or '').lower() else ''))
+                     evidence=f"Agent's listing changed from \u201c{old}\u201d to \u201c{new}\u201d" + (' (not confirmed as a completed sale)' if any(w in (new or '').lower() for w in ('sold', 'completed')) else ''))
         elif k == 'basis_changed':
             e.update(type='basis_change', basisBefore=BASIS.get((old or '').lower(), 'Unknown'), basisAfter=BASIS.get((new or '').lower(), 'Unknown'))
         elif k == 'no_longer_listed':

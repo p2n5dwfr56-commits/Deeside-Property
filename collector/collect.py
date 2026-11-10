@@ -120,7 +120,7 @@ def locate(address, searched):
     'Lochton Steading, Durris, Banchory, AB31 6DB'                     -> ('Durris', 'Banchory', False)
     The search that found a listing is only used when the address names no place at all."""
     parts = [p.strip() for p in (address or '').split(',') if p.strip()]
-    parts = [p for p in parts if not re.fullmatch(r'AB\d{1,2}\s*\d[A-Z]{2}|Aberdeenshire|Scotland|United Kingdom|UK', p, re.I)]
+    parts = [p for p in parts if not re.fullmatch(r'AB\d{1,2}\s*\d[A-Z]{2}|Aberdeenshire|Aberdeen City|Scotland|United Kingdom|UK', p, re.I)]
     places = [p for p in parts[1:] if not STREET.search(p)]          # the first part is the house or street
     if not places:
         return searched, searched, any(_norm(searched) == _norm(t) for t in TOWNS)

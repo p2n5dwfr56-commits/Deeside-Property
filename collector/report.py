@@ -10,7 +10,7 @@ def describe(kind, old, new):
             'price_reduced': lambda: f'Price reduced {money(old)} → {money(new)} ({money(int(old) - int(new))} less)',
             'price_increased': lambda: f'Price increased {money(old)} → {money(new)}',
             'status_changed': lambda: f'Status {old} → {new}' + (' (back on the market)' if (old or '').lower().startswith(('under', 'sold')) and (new or '').lower() == 'for sale' else '')
-                              + (' (the agent’s label; not confirmed as a completed sale)' if 'sold' in (new or '').lower() else ''),
+                              + (' (the agent’s label; not confirmed as a completed sale)' if any(w in (new or '').lower() for w in ('sold', 'completed')) else ''),
             'basis_changed': lambda: f'Pricing basis {old} → {new}',
             'no_longer_listed': lambda: 'No longer listed (not in any town’s results; not confirmed as sold or withdrawn)',
             'relisted': lambda: 'Listed again'}.get(kind, lambda: kind)()
