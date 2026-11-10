@@ -1,20 +1,4 @@
-# domain | pages to fetch (relative), space separated
-www.aspc.co.uk | /robots.txt / /sitemap.xml
-www.acandco.com | /robots.txt / /sitemap.xml /property-for-sale
-property.acandco.com | /robots.txt
-www.northwooduk.com | /robots.txt / /sitemap.xml
-struttandparker.com | /robots.txt
-www.peterkins.com | /robots.txt / /sitemap.xml
-www.rccw.co.uk | /robots.txt / /sitemap.xml
-www.mackinnons.com | /robots.txt / /sitemap.xml
-www.galbraithgroup.com | /robots.txt / /sitemap.xml
-www.burnett-reid.co.uk | /robots.txt /
-www.ledinghamchalmers.com | /robots.txt / /sitemap.xml
-www.andersonbain.co.uk | /robots.txt /
-www.gilsongray.co.uk | /robots.txt /
-www.espc.com | /robots.txt
-www.s1homes.com | /robots.txt
-www.rightmove.co.uk | /robots.txt
-www.zoopla.co.uk | /robots.txt
-www.onthemarket.com | /robots.txt
-# rerun 2026-11-10T19:32:24Z
+# domain | pages to fetch (relative), space separated. Round 2: terms of use, the property sitemap, a search and a listing page.
+www.aspc.co.uk | /terms-and-conditions/ /sitemapxml/Properties/ /sitemapxml/Areas/ /search/property/438705/19-Pinefield/Banchory/ /search/?PrimaryPropertyType=Buy&SortBy=PublishedDesc&LastUpdated=AddedAnytime&PropertyType=None&ExcludeUnderOffer=false&IncludeClosedProperties=true&ClosedDatesSearch=14&ByFixedPriceOnly=false&ResultMode=NONE&ResultView=LIST&Locations=Banchory
+www.northwooduk.com | /terms-and-conditions/ /aberdeen-estate-agents/banchory/
+www.peterkins.com | /terms-and-conditions/ /website-terms/
