@@ -7,7 +7,8 @@ import { join, extname } from 'node:path';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const pw = require('playwright');
-const [root, pass, dayArg] = process.argv.slice(2); const day = Number(dayArg || 1); // which test day the data is from
+const [root, pass, dayArg] = process.argv.slice(2); const day = Number(dayArg || 1); // which collection this is
+const scenarioDay = ((day - 1) % 3) + 1; // the test site repeats its three days (collector/testsite.py)
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.webmanifest': 'application/manifest+json' };
 const server = createServer(async (req, res) => {
   const p = join(root, decodeURIComponent(req.url.split('?')[0]).replace(/\/$/, '/index.html'));
@@ -33,7 +34,7 @@ else check('day 2+: 1 Example Road shows its price reduction £350,000 → £335
 check('its floor area and type are shown', /140/.test(t1) && /Detached/.test(t1));
 await page.goto(url + '#p-T4'); await page.waitForTimeout(800);
 const t4 = await page.textContent('body');
-if (day >= 2) { const pill = await page.locator('.pill[class*="st-"]').first().textContent(); const sold = await page.locator('.pill.st-sold').count();
+if (scenarioDay >= 2) { const pill = await page.locator('.pill[class*="st-"]').first().textContent(); const sold = await page.locator('.pill.st-sold').count();
   check('day 2+: the agent’s “Sold” is shown as Under offer, not a confirmed sale', pill === 'Under offer' && sold === 0, `status badge: ${pill}`); }
 await page.goto(url + '#p-T7'); await page.waitForTimeout(800);
 check('a neighbouring village keeps its own name (Drumoak)', /Drumoak/.test(await page.textContent('body')));
